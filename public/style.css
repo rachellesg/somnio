@@ -1,4 +1,110 @@
+@font-face {
+    font-family: 'BentonModDisp BD';
+    src: url('fonts/BentonModDisp-Bold.woff2') format('woff2'),
+        url('fonts/BentonModDisp-Bold.woff') format('woff');
+    font-weight: bold;
+    font-style: normal;
+}
+
+@font-face {
+    font-family: 'BentonModDisp RG I';
+    src: url('fonts/BentonModDisp-RegularItalic.woff2') format('woff2'),
+        url('fonts/BentonModDisp-RegularItalic.woff') format('woff');
+    font-weight: normal;
+    font-style: italic;
+}
+
+@font-face {
+    font-family: 'BentonModDisp RG';
+    src: url('fonts/BentonModDisp-Regular.woff2') format('woff2'),
+        url('fonts/BentonModDisp-Regular.woff') format('woff');
+    font-weight: normal;
+    font-style: normal;
+}
+
 body {
+    font-family: 'BentonModDisp RG';
+    font-size: 20px;
+    line-height: 26px;
+    background: #f5f7e9;
+    color: #b6c06a;
+    letter-spacing: 1px;
+}
+
+.container {
+    width: 100%;
+    max-width: 700px;
+    margin: 0 auto;
+    padding: 30px;
+}
+
+@media screen and (max-size: 414px) {
+    .container {
+        max-width: 400px;
+    }
+}
+
+@media screen and (max-size: 768px) {
+    .container {
+        max-width: 700px;
+    }
+}
+
+.nav {
+    display: flex;
+    justify-content: space-between;
+    margin: 0 auto 50px;
+    background: #16160c;
+    color: #ffffff;
+}
+
+.logo {
+    max-width: 180px;
+}
+
+.logo img {
+    max-width: 100%;
+}
+
+/* HEADERS */
+
+h1 {
+    color: #353822;
+}
+
+/* MAIN LISTING PAGE */
+.dreams-card {
+    display: inline-flex;
+    width: 100%;
+}
+
+.dreams-card-category {
+    margin-right: 30px;
+}
+
+
+/* FORMS */
+
+input[type="text"] {
+    margin-top: 8px;
+    border-radius: 5px;
+    width: 400px;
     font-size: 18px;
-    line-height: 25px;
+}
+
+.input-text:focus {
+    outline: none;
+    box-shadow: none;
+}
+
+.button-submit {
+    padding: 10px 20px;
+    border: none;
+    border-radius: 5px;
+    font-size: 18px;
+}
+
+.button-submit:hover {
+    background: #000000;
+    cursor: pointer;
 }
