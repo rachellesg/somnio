@@ -17,4 +17,6 @@
 
 ## Acknowledgements
 
-Yannick Lung [https://www.iconfinder.com/iconsets/hawcons]
+Icons made by <a href="https://www.flaticon.com/authors/freepik" title="Freepik">Freepik</a> 
+
+https://www.flaticon.com/packs/time-to-sleep-6

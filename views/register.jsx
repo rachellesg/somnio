@@ -5,7 +5,7 @@ class Register extends React.Component {
   render() {
     return (
       <Layout>
-        <h1>Register to be a DREAMER </h1>
+        <h1><img class="h1-icon" src="/images/sleep.png" /> Register today to be a dreamer... </h1>
         <form action="/register" autocomplete="off" method="POST">
             <div class="form-row">
                 <div class="label-name">Name:</div> 

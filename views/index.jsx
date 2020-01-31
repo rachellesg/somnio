@@ -7,19 +7,32 @@ class Home extends React.Component {
     //   return <li>{item.name}</li>
     // });
     return (
-      <Layout>
-        <h1>YOUR DREAMS</h1>
-        {/* {listOfDreams} */}
-        <div class="dreams-card">
-          <div class="dreams-card-category">
-            {this.props.category}
-          </div>
-          <div class="dreams-card-information">
-            Title: {this.props.name}<br />
-            {this.props.description}<br/>
-          </div>
-        </div>
-      </Layout>
+      <html>
+          <head>
+          <meta name="viewport" content="width=device-width, initial-scale=1" />
+              <title>somniō // (present infinitive somniāre, perfect active somniāvī, supine somniātum);</title>
+              <link rel="stylesheet" href="/style.css"/>
+          </head>
+          <body>
+              <div class="welcome-screen">
+                  <header>
+                    <img src="/images/dream.png" class="header-icon" /> 
+                    somniō
+                    <div class="sleeping">
+                       <span>z</span>
+                       <span>z</span>
+                       <span>z</span>
+                    </div>
+                  </header>
+                  <p class="index-description">
+                    (present infinitive somniāre, perfect active somniāvī, supine somniātum);
+                  </p>
+                  <div class="index-actions">
+                    <a href="/register">Register today to be a dreamer</a> | <a href="/login">Start dreaming</a>
+                  </div>
+              </div>
+          </body>
+      </html>
     );
   }
 }

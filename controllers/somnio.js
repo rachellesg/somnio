@@ -21,13 +21,10 @@ module.exports = (db) => {
 
     // create users
     let createUser = (request, response) => {
-      let name = request.body.name;
-      let username = request.body.username;
-      let password = sha256(request.body.password);
       const data = {
-        name: name,
-        username: username,
-        password: password
+        username: request.body.username,
+        name: request.body.name,
+        password: request.body.password
       }
       db.somnio.createUser(data, (error, result) => {
         if (error) {
@@ -50,15 +47,12 @@ module.exports = (db) => {
         id: userID
       }
       db.somnio.userPage(data, (error,result) => {
-        let info = {
-          name: result.name,
-          username: result.username,
-          dreamname: result.dreamname,
-          description: result.dreamdescription,
-          dreamcategory: result.dreamcategory,
-          privacy: result.dreamprivacy
+        let data = {
+          dreams: result,
+          dream: result[0]
         }
-        response.render('user', info)
+        console.log("controller", data)
+        response.render('user', data)
       })
     }
 
@@ -68,20 +62,24 @@ module.exports = (db) => {
     }
 
     let loginUser = (request, response) => {
-      let username = request.body.username;
-      let password = sha256(request.body.password);
-      console.log("user: ", username);
-      console.log("password: ", password);
-      db.somnio.loginUser(username, password, (error, result) => {
+      let data = {
+        username: request.body.username,
+        password: sha256(request.body.password + SALT)
+    }
+      console.log("user: ", data);
+      db.somnio.loginUser(data, (error, result) => {
         if (error) {
           console.log(error)
           response.send('404')
         } else {
           const userID = result.id;
           const username = result.username;
+          let data = {
+            dreams: result
+          }
           response.cookie('userID', userID);
           response.cookie('username', username);
-          response.render('user', result);
+          response.render('user', data);
         }
       });
     }

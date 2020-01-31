@@ -1,3 +1,6 @@
+const sha256 = require("js-sha256");
+const SALT = 'supersecret';
+
 /**
  * ===========================================
  * Export model functions as a module
@@ -22,8 +25,9 @@ module.exports = (dbPoolInstance) => {
 
     let createUser = (data, callback) => {
       let query = 'INSERT INTO users (username, name, password) VALUES ($1,$2,$3) RETURNING *';
-      let values = [data.username, data.name, data.password];
-      console.log(data);
+      let password = sha256(data.password + SALT);
+      let values = [data.username, data.name, password];
+      // console.log(data);
       dbPoolInstance.query(query, values, (error, queryResult) => {
         if (error) {
           // invoke callback function with results after query has executed
@@ -35,9 +39,9 @@ module.exports = (dbPoolInstance) => {
       });
     }
 
-    let loginUser = (username, password, callback) => {
+    let loginUser = (data, callback) => {
       let query = 'SELECT * FROM users WHERE username=$1';
-      let values = [username];
+      let values = [data.username];
       dbPoolInstance.query(query, values, (error, queryResult) => {
         if (error) {
           // invoke callback function with results after query has executed
@@ -46,7 +50,7 @@ module.exports = (dbPoolInstance) => {
           if (queryResult.rows[0] === undefined) {
             callback("User doesn't exist!");
         } else {
-            if (queryResult.rows[0].password === password) {
+            if (queryResult.rows[0].password === data.password) {
               callback(error, queryResult.rows[0]);
             } else {
               callback("Wrong password!");
@@ -65,8 +69,9 @@ module.exports = (dbPoolInstance) => {
           // invoke callback function with results after query has executed
           callback(error, null);
         } else {
-          callback(error, queryResult.rows[0]);
-          console.log("inside dbpool", queryResult.rows[0]);
+          console.log(queryResult.rows);
+          callback(error, queryResult.rows);
+          // console.log("inside dbpool", queryResult.rows[0]);
         }
       });
     }
@@ -81,7 +86,7 @@ module.exports = (dbPoolInstance) => {
           callback(error, null);
         } else {
           callback(error, queryResult.rows[0]);
-          console.log("inside dbpool", queryResult.rows[0]);
+          // console.log("inside dbpool", queryResult.rows[0]);
         }
       });
     };

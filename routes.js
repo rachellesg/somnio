@@ -21,7 +21,7 @@ module.exports = (app, allModels) => {
     app.post('/register', somnioControllers.createUser);
 
     app.get('/login', somnioControllers.login);
-    app.post('/login', somnioControllers.loginUser);
+    app.post('/profile', somnioControllers.loginUser);
     app.get('/profile/:id', somnioControllers.userPage);
   };
   

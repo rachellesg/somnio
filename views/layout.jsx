@@ -15,10 +15,12 @@ class Layout extends React.Component {
                     <div class="container main">
                         <div class="nav">
                             <div class="logo">
-                                <img src="/images/logo.gif"/>
+                                <span class="logo-text">
+                                    <a href="/">somniō</a>
+                                </span>
                             </div>
                             <div class="create_dream">
-                                + ADD DREAM
+                                home  |  profile  |  add dream | log out
                             </div>
                         </div>
                         <div class="content">
