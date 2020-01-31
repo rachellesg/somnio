@@ -1,7 +1,7 @@
 # Somnio
 
 
-## The Game
+## The App
 
 
 ## Application Development Process
@@ -16,6 +16,5 @@
 ## Future Development
 
 ## Acknowledgements
-This project is purely educational and experimental. It would not have been possible without the following sources:
 
 Yannick Lung [https://www.iconfinder.com/iconsets/hawcons]

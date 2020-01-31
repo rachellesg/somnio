@@ -26,8 +26,9 @@ body {
     font-family: 'BentonModDisp RG';
     font-size: 20px;
     line-height: 26px;
-    background: #f5f7e9;
-    color: #b6c06a;
+    background: #0a1f45;
+    background-size: cover;
+    color: #ffffff;
     letter-spacing: 1px;
 }
 
@@ -70,6 +71,7 @@ body {
 
 h1 {
     color: #353822;
+    font-family: 'BentonModDisp BD';
 }
 
 /* MAIN LISTING PAGE */
@@ -85,26 +87,87 @@ h1 {
 
 /* FORMS */
 
-input[type="text"] {
-    margin-top: 8px;
+.form-row {
+    margin: 25px 0;
+    display: inline-flex;
+    justify-content: stretch;
+    width: 100%;
+}
+
+.form-row-title-highlight {
+    background: #2d396c;
     border-radius: 5px;
+    padding: 10px;
+    text-align: center;
+}
+
+.label-name {
+    margin: 0 20px 0 0;
+    width: 50%;
+}
+
+input[type="text"] {
     width: 400px;
     font-size: 18px;
+    background: transparent;
+    border-top: 0;
+    border-left: 0;
+    border-right: 0;
+    border-bottom: 1px solid #ffffff;
+    padding: 5px 0px;
+    color: #ffffff;
+    outline: none;
 }
 
 .input-text:focus {
     outline: none;
     box-shadow: none;
+    background: transparent;
 }
 
+    /* auto complete styles
+    /* Change Autocomplete styles in Chrome*/
+    input:-webkit-autofill,
+    input:-webkit-autofill:hover, 
+    input:-webkit-autofill:focus,
+    textarea:-webkit-autofill,
+    textarea:-webkit-autofill:hover,
+    textarea:-webkit-autofill:focus,
+    select:-webkit-autofill,
+    select:-webkit-autofill:hover,
+    select:-webkit-autofill:focus {
+    font-size: 18px;
+    border-top: 0;
+    border-left: 0;
+    border-right: 0;
+    border-bottom: 1px solid #ffffff;
+    background: transparent;
+    -webkit-text-fill-color: #ffffff;
+    transition: background-color 5000s ease-in-out 0s;
+    }
+
 .button-submit {
-    padding: 10px 20px;
+    padding: 10px 0px;
     border: none;
     border-radius: 5px;
-    font-size: 18px;
+    width: 250px;
+    color: #ffffff;
+    font-size: 20px;
+    font-family: 'BentonModDisp BD';
+}
+
+.form-button {
+    text-align: center;
+    display: block;
+    margin: 20px auto;
 }
 
 .button-submit:hover {
-    background: #000000;
     cursor: pointer;
+}
+
+.button-submit {
+    background: rgb(115,99,159);
+    background: linear-gradient(90deg, #c28bb7 0%, rgba(115,99,159,1) 50%, 
+    rgba(84,83,147,1) 100%);
 }

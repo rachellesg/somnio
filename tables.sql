@@ -1,6 +1,8 @@
 CREATE TABLE IF NOT EXISTS users (
   "id" SERIAL PRIMARY KEY,
-  "name" TEXT
+  "username" TEXT,
+  "name" TEXT,
+  "password" TEXT
 );
 
 CREATE TABLE IF NOT EXISTS dream_log (

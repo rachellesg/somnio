@@ -8,16 +8,45 @@ module.exports = (db) => {
      */
 
     let homepage = (request, response) => {
-      db.somnio.homepage((error, result) => {
-        response.render('index', result);
+      db.somnio.homepage(data, (error, result) => {
+        const data = {
+          data: data
+        }
+        response.render('index', data);
       });
     }
 
+    // render register page
+    let register = (request, response) => {
+      response.render('register');
+    }
+
+    let createUser = (request, response) => {
+      let name = request.body.name;
+      let username = request.body.username;
+      let userpassword = request.body.password;
+      const data = {
+        name: name,
+        username: username,
+        password: userpassword
+      }
+      db.somnio.createUser(data, (error, result) => {
+        response.render('user', data)
+      });
+    }
+
+    let userPage = (request, response) => {
+      db.somnio.userPage(data, (error,result) => {
+        response.render('user', data)
+      })
+    }
+
+    // render CREATE dream entry page
     let addDreams = (request,response) => {
-      // add-dreams
       response.render('create-entry');
     }
 
+    // function of CREATING dream entry
     let createDreams = (request, response) => {
       let title = request.body.title;
       let description = request.body.description;
@@ -36,6 +65,10 @@ module.exports = (db) => {
       });
     }
 
+    let editDreams = (request, response) => {
+      
+    }
+
     /**
      * ===========================================
      * Export controller functions as a module
@@ -44,7 +77,10 @@ module.exports = (db) => {
     return {
         homepage,
         addDreams,
-        createDreams
+        createDreams,
+        register,
+        createUser,
+        userPage
     };
   
   }

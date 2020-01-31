@@ -7,26 +7,35 @@ class Home extends React.Component {
     return (
       <Layout>
         <h1>ADD A DREAM</h1>
-        <form action="/add-dreams" method="POST">
+        <form action="/add-dreams" autocomplete="off" method="POST">
             <input type="text" name="id" value="1" />
-            <div class="form-row">
-                <span class="label-name">Title of Dream:</span> 
-                <input class="input-text" type="text" name="title" />
+            <div class="form-row form-row-title-highlight">
+                <div class="label-name">Title of Dream:</div> 
+                <input class="input-text" type="text" name="title" placeholder="Yellow Jeans 👖" />
             </div>
             <div class="form-row">
-                <span class="label-name">Description of Dream:</span> 
+                <div class="label-name">Visibility:</div> 
+                <label>
+                    <input type="radio" name="private" value="true" checked/> Private 
+                </label>
+                <label>
+                    <input type="radio" name="private" value="false" /> Public 
+                </label>
+            </div>
+            <div class="form-row">
+                <div class="label-name">Dream Theme:</div> 
+                <label>
+                    <input type="checkbox" name="category" value="angry" /> Angry  
+                </label>
+                <input type="checkbox" name="category" value="happy" /> Happy  <input type="checkbox" name="category" value="worried" /> Worried  <input type="checkbox" name="category" value="confused" /> Confused
+            </div>
+            <div class="form-row">
+                <div class="label-name">Description of Dream:</div> 
                 <textarea name="description"> </textarea>
             </div>
-            <div class="form-row">
-                <span class="label-name">Visibility:</span> 
-                <input type="radio" name="private" value="true" /> Private 
-                <input type="radio" name="private" value="false" /> Public 
+            <div class="form-row form-button">
+                <input class="button-submit" type="submit" />
             </div>
-            <div class="form-row">
-                <span class="label-name">Category:</span> 
-                <input type="checkbox" name="category" value="angry" /> Angry  <input type="checkbox" name="category" value="happy" /> Happy  <input type="checkbox" name="category" value="worried" /> Worried  <input type="checkbox" name="category" value="confused" /> Confused
-            </div>
-            <input class="button-submit" type="submit" />
         </form>
       </Layout>
     );

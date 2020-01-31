@@ -9,6 +9,7 @@ class Layout extends React.Component {
                 <head>
                     <title>{this.props.pagetitle}</title>
                     <link rel="stylesheet" href="/style.css"/>
+                    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/normalize/8.0.1/normalize.css" />
                 </head>
                 <body>
                     <div class="container main">
