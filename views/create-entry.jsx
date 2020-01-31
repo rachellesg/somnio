@@ -7,8 +7,8 @@ class Home extends React.Component {
     return (
       <Layout>
         <h1>ADD A DREAM</h1>
-        <form action="/add-dreams" autocomplete="off" method="POST">
-            <input type="text" name="id" value="1" />
+        <form action="/add" autocomplete="off" method="POST">
+            <input type="text" name="id" value= {this.props.id} />
             <div class="form-row form-row-title-highlight">
                 <div class="label-name">Title of Dream:</div> 
                 <input class="input-text" type="text" name="title" placeholder="Yellow Jeans 👖" />

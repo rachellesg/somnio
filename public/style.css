@@ -26,8 +26,7 @@ body {
     font-family: 'BentonModDisp RG';
     font-size: 20px;
     line-height: 26px;
-    background: #0a1f45;
-    background-size: cover;
+    background: #302340;
     color: #ffffff;
     letter-spacing: 1px;
 }
@@ -70,7 +69,7 @@ body {
 /* HEADERS */
 
 h1 {
-    color: #353822;
+    color: #d9d71e;
     font-family: 'BentonModDisp BD';
 }
 
@@ -170,4 +169,10 @@ input[type="text"] {
     background: rgb(115,99,159);
     background: linear-gradient(90deg, #c28bb7 0%, rgba(115,99,159,1) 50%, 
     rgba(84,83,147,1) 100%);
+}
+
+/* USER profile */
+.user-profile-top {
+    display: inline-flex;
+    justify-content: space-between;
 }

@@ -5,8 +5,18 @@ class Home extends React.Component {
   render() {
     return (
       <Layout>
-        <h1>{this.props.name}</h1>
-        {this.props.username}
+        <div class="user-profile">
+          <div class="user-profile-top">
+            <div class="user-profile-username">
+              <h1>#{this.props.username}</h1>
+            </div>
+            <div class="user-profile-follow">
+              X
+            </div>
+          </div>
+        </div>
+        
+        {this.props.dreamname} {this.props.privacy} {this.props.dreamcategory}
       </Layout>
     );
   }

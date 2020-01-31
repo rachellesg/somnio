@@ -1,4 +1,5 @@
-// const sha256 = require("js-sha256");
+const sha256 = require("js-sha256");
+const SALT = 'supersecret';
 
 module.exports = (db) => {
     /**
@@ -8,11 +9,8 @@ module.exports = (db) => {
      */
 
     let homepage = (request, response) => {
-      db.somnio.homepage(data, (error, result) => {
-        const data = {
-          data: data
-        }
-        response.render('index', data);
+      db.somnio.homepage((error, result) => {
+        response.render('index');
       });
     }
 
@@ -21,29 +19,82 @@ module.exports = (db) => {
       response.render('register');
     }
 
+    // create users
     let createUser = (request, response) => {
       let name = request.body.name;
       let username = request.body.username;
-      let userpassword = request.body.password;
+      let password = sha256(request.body.password);
       const data = {
         name: name,
         username: username,
-        password: userpassword
+        password: password
       }
       db.somnio.createUser(data, (error, result) => {
-        response.render('user', data)
+        if (error) {
+          console.log(error)
+          response.send('404')
+        } else {
+          const userID = result.id;
+          const username = result.username;
+          response.cookie("userID", userID);
+          response.cookie("username", username);
+          response.render('user', data)
+        }
       });
     }
 
+    // loading user's profile page
     let userPage = (request, response) => {
+      let userID = request.params.id;
+      const data = {
+        id: userID
+      }
       db.somnio.userPage(data, (error,result) => {
-        response.render('user', data)
+        let info = {
+          name: result.name,
+          username: result.username,
+          dreamname: result.dreamname,
+          description: result.dreamdescription,
+          dreamcategory: result.dreamcategory,
+          privacy: result.dreamprivacy
+        }
+        response.render('user', info)
       })
+    }
+
+    // render LOGIN form
+    let login = (request, response) => {
+      response.render('login');
+    }
+
+    let loginUser = (request, response) => {
+      let username = request.body.username;
+      let password = sha256(request.body.password);
+      console.log("user: ", username);
+      console.log("password: ", password);
+      db.somnio.loginUser(username, password, (error, result) => {
+        if (error) {
+          console.log(error)
+          response.send('404')
+        } else {
+          const userID = result.id;
+          const username = result.username;
+          response.cookie('userID', userID);
+          response.cookie('username', username);
+          response.render('user', result);
+        }
+      });
     }
 
     // render CREATE dream entry page
     let addDreams = (request,response) => {
-      response.render('create-entry');
+      const userID = request.cookies.userID;
+      const username = request.cookies.username;
+      const data = {
+        id: userID,
+        username: username
+      }
+      response.render('create-entry', data);
     }
 
     // function of CREATING dream entry
@@ -80,7 +131,9 @@ module.exports = (db) => {
         createDreams,
         register,
         createUser,
-        userPage
+        userPage,
+        login,
+        loginUser
     };
   
   }
