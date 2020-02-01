@@ -23,7 +23,6 @@ module.exports = (db) => {
     let createUser = (request, response) => {
       const data = {
         username: request.body.username,
-        name: request.body.name,
         password: request.body.password
       }
       db.somnio.createUser(data, (error, result) => {
@@ -33,6 +32,10 @@ module.exports = (db) => {
         } else {
           const userID = result.id;
           const username = result.username;
+          let data = {
+            username: result.username
+          }
+          console.log("print", result.username)
           response.cookie("userID", userID);
           response.cookie("username", username);
           response.render('user', data)
@@ -41,19 +44,31 @@ module.exports = (db) => {
     }
 
     // loading user's profile page
+    // without loading dreams
     let userPage = (request, response) => {
       let userID = request.params.id;
       const data = {
         id: userID
       }
-      db.somnio.userPage(data, (error,result) => {
+      console.log('userid', userID);
+      db.somnio.userDreamsPage(data, (error,result) => {
+      const currentUser = request.cookies.username;
         let data = {
+          currentuser: currentUser,
           dreams: result,
-          dream: result[0]
+          userinfo: result[0]
         }
-        console.log("controller", data)
-        response.render('user', data)
+       console.log("controller", data)
+        response.render('public-profile', data)
       })
+    }
+
+    // loading user's profile DREAMS page
+    let userDreamsPage = (request, response) => {
+      let userID = request.cookies.userID;
+      const data = {
+        id: userID
+      }
     }
 
     // render LOGIN form
@@ -66,7 +81,7 @@ module.exports = (db) => {
         username: request.body.username,
         password: sha256(request.body.password + SALT)
     }
-      console.log("user: ", data);
+      console.log("logged in user: ", data);
       db.somnio.loginUser(data, (error, result) => {
         if (error) {
           console.log(error)
@@ -77,6 +92,7 @@ module.exports = (db) => {
           let data = {
             dreams: result
           }
+          console.log(result)
           response.cookie('userID', userID);
           response.cookie('username', username);
           response.render('user', data);
@@ -92,6 +108,7 @@ module.exports = (db) => {
         id: userID,
         username: username
       }
+      console.log(username, userID)
       response.render('create-entry', data);
     }
 
@@ -101,16 +118,19 @@ module.exports = (db) => {
       let description = request.body.description;
       let visibility = request.body.private;
       let category = request.body.category;
-      let user_id = request.body.id;
+      let user_id = request.cookies.userID;
+      let entry_date = new Date();
       const data = {
         title: title, 
         description: description,
         user_id: user_id,
         visibility: visibility,
-        category: category
+        category: category,
+        date: entry_date
       }
       db.somnio.createEntry(data, (error, result) => {
-        response.redirect('/');
+        console.log(data)
+        response.redirect('/profile');
       });
     }
 
@@ -131,7 +151,8 @@ module.exports = (db) => {
         createUser,
         userPage,
         login,
-        loginUser
+        loginUser,
+        userDreamsPage
     };
   
   }

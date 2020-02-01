@@ -1,14 +1,17 @@
+DROP TABLE IF EXISTS users;
+DROP TABLE IF EXISTS dream_log;
+DROP TABLE IF EXISTS dream_categories;
+DROP TABLE IF EXISTS followers;
+
 CREATE TABLE IF NOT EXISTS users (
   "id" SERIAL PRIMARY KEY,
   "username" TEXT,
-  "name" TEXT,
   "password" TEXT
 );
 
 CREATE TABLE IF NOT EXISTS dream_log (
   "id" SERIAL PRIMARY KEY,
   "name" TEXT,
-  "count" INTEGER,
   "description" TEXT,
   "user_id" INTEGER REFERENCES users(id),
   "created_at" DATE,
@@ -20,7 +23,7 @@ CREATE TABLE IF NOT EXISTS dream_categories (
   "id" SERIAL PRIMARY KEY,
   "name" TEXT,
   "description" TEXT,
-  "count" INTEGER
+  "image" TEXT
 );
 
 CREATE TABLE IF NOT EXISTS followers (

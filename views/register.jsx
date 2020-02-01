@@ -8,10 +8,6 @@ class Register extends React.Component {
         <h1><img class="h1-icon" src="/images/sleep.png" /> Register today to be a dreamer... </h1>
         <form action="/register" autocomplete="off" method="POST">
             <div class="form-row">
-                <div class="label-name">Name:</div> 
-                <input class="input-text" type="text" name="name" />
-            </div>
-            <div class="form-row">
                 <div class="label-name">Username:</div> 
                 <input class="input-text" type="text" name="username" />
             </div>

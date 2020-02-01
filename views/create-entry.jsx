@@ -3,12 +3,10 @@ const Layout = require("./layout");
 
 class Home extends React.Component {
   render() {
-    let dreamsUrl = "/dreams/"+this.props.name;
     return (
       <Layout>
         <h1>ADD A DREAM</h1>
         <form action="/add" autocomplete="off" method="POST">
-            <input type="text" name="id" value= {this.props.id} />
             <div class="form-row form-row-title-highlight">
                 <div class="label-name">Title of Dream:</div> 
                 <input class="input-text" type="text" name="title" placeholder="Yellow Jeans 👖" />

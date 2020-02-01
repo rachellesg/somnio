@@ -79,11 +79,18 @@ a:hover {
     color: #16160c;
 }
 
+
+.highlight {
+    color: #d9d71e;
+    border-bottom: 2px solid;
+    font-family: 'BentonModDisp BD';
+}
+
 /* HEADERS */
 
 h1 {
     color: #a790bc;
-    /* background: rgb(255,255,255,0.1); */
+    line-height: 35px;
     font-family: 'BentonModDisp BD';
 }
 

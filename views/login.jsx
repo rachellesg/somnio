@@ -5,7 +5,8 @@ class Login extends React.Component {
   render() {
     return (
       <Layout>
-        <h1>Login to store your dreams</h1>
+        <h1>you're just a step away,<br />
+        <span class="highlight">login</span> to store your dreams</h1>
         <form action="/profile" autocomplete="off" method="POST">
             <div class="form-row">
                 <div class="label-name">Username:</div> 

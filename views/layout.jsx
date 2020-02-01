@@ -20,6 +20,7 @@ class Layout extends React.Component {
                                 </span>
                             </div>
                             <div class="create_dream">
+                                {/* {this.props.dreams.username} */}
                                 home  |  profile  |  add dream | log out
                             </div>
                         </div>
