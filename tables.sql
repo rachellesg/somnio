@@ -22,7 +22,6 @@ CREATE TABLE IF NOT EXISTS dream_log (
 CREATE TABLE IF NOT EXISTS dream_categories (
   "id" SERIAL PRIMARY KEY,
   "name" TEXT,
-  "description" TEXT,
   "image" TEXT
 );
 

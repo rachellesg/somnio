@@ -155,6 +155,10 @@ header {
     width: 100%;
 }
 
+.form-row-text {
+    border-bottom: 1px solid;
+}
+
 .form-row-title-highlight {
     background: #2d396c;
     border-radius: 5px;
@@ -164,18 +168,16 @@ header {
 
 .label-name {
     margin: 0 20px 0 0;
-    width: 50%;
+    /* width: 50%; */
 }
 
 input[type="text"] {
     width: 400px;
-    font-size: 18px;
     background: transparent;
     border-top: 0;
     border-left: 0;
     border-right: 0;
-    border-bottom: 1px solid #ffffff;
-    padding: 5px 0px;
+    border-bottom: 0;
     color: #ffffff;
     outline: none;
 }
@@ -184,6 +186,14 @@ input[type="text"] {
     outline: none;
     box-shadow: none;
     background: transparent;
+}
+
+textarea {
+    resize: none;
+    outline: none;
+    background: transparent;
+    border: 1px solid #ffffff;
+    color: #ffffff;
 }
 
     /* auto complete styles
@@ -206,6 +216,76 @@ input[type="text"] {
     -webkit-text-fill-color: #ffffff;
     transition: background-color 5000s ease-in-out 0s;
     }
+
+
+input[type="radio"] {
+    visibility: hidden;
+}
+
+.feelings-label {
+    width: 35px;
+    height: 35px;
+}
+
+label[for="angry"] {
+    background: url('/images/feelings/angry.png') no-repeat center;
+    background-size: contain;
+}
+
+:checked + label[for="angry"] {
+    background: url('/images/feelings/angry-checked.png') no-repeat center;
+    background-size: contain;
+}
+
+label[for="happy"] {
+    background: url('/images/feelings/happy.png') no-repeat center;
+    background-size: contain;
+}
+
+:checked + label[for="happy"] {
+    background: url('/images/feelings/happy-checked.png') no-repeat center;
+    background-size: contain;
+}
+
+label[for="peaceful"] {
+    background: url('/images/feelings/peaceful.png') no-repeat center;
+    background-size: contain;
+}
+
+:checked + label[for="peaceful"] {
+    background: url('/images/feelings/peaceful-checked.png') no-repeat center;
+    background-size: contain;
+}
+
+label[for="scared"] {
+    background: url('/images/feelings/scared.png') no-repeat center;
+    background-size: contain;
+}
+
+:checked + label[for="scared"] {
+    background: url('/images/feelings/scared-checked.png') no-repeat center;
+    background-size: contain;
+}
+
+label[for="worried"] {
+    background: url('/images/feelings/worried.png') no-repeat center;
+    background-size: contain;
+}
+
+:checked + label[for="worried"] {
+    background: url('/images/feelings/worried-checked.png') no-repeat center;
+    background-size: contain;
+}
+
+/* :checked + label {
+    border-color: #ddd;
+}
+  
+:checked + label:before {
+content: "✓";
+background-color: grey;
+transform: scale(1);
+} */
 
 .form-button {
     text-align: center;
@@ -248,10 +328,12 @@ input[type="text"] {
     justify-content: space-between; 
     width: 100%;
     margin: 20px auto;
+    flex-wrap: wrap;
 }
 
 .user-profile-cards-dream {
-    flex: 1 1 50%;
+    flex: 1 1 33%;
+    margin-bottom: 20px;
 }
 
 .user-name {

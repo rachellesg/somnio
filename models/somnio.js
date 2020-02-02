@@ -9,20 +9,6 @@ const SALT = 'supersecret';
 
 module.exports = (dbPoolInstance) => {
 
-    // `dbPoolInstance` is accessible within this function scope
-    let homepage = (callback) => {
-      let query = 'SELECT * FROM dream_log WHERE user_id=1';
-      dbPoolInstance.query(query, (error, queryResult) => {
-        if (error) {
-          // invoke callback function with results after query has executed
-          callback(error, null);
-        } else {
-          callback(error, queryResult.rows[0]);
-          console.log(queryResult.rows[0]);
-        }
-      });
-    };
-
     let createUser = (data, callback) => {
       let query = 'INSERT INTO users (username, password) VALUES ($1,$2) RETURNING *';
       let password = sha256(data.password + SALT);
@@ -59,33 +45,18 @@ module.exports = (dbPoolInstance) => {
         }
       });
     }
-
-    let userPage = (data, callback) => {
-      let query = 'SELECT * FROM users WHERE id=$1'
-      let values = [data.id];
-      dbPoolInstance.query(query, values, (error, queryResult) => {
-        if (error) {
-          // invoke callback function with results after query has executed
-          callback(error, null);
-        } else {
-          console.log(queryResult.rows);
-          callback(error, queryResult.rows[0]);
-          console.log("inside dbpool", queryResult.rows[0]);
-        }
-      });
-    }
-
+    
     let userDreamsPage = (data, callback) => {
       let query = 'SELECT users.id AS userID, users.username AS username, dream_log.name AS dreamname, dream_log.description AS dreamdescription, dream_log.category AS dreamcategory, dream_log.private AS dreamprivacy FROM users INNER JOIN dream_log ON (users.id = dream_log.user_id) WHERE users.id=$1;'
       // let query = 'SELECT * FROM dream_log WHERE user_id=$1'
       let values = [data.id];
-      console.log("user valueszx", values);
+      console.log("user values:", values);
       dbPoolInstance.query(query, values, (error, queryResult) => {
         if (error) {
           // invoke callback function with results after query has executed
           callback(error, null);
         } else {
-          console.log("dreamlog where user = $1", queryResult.rows);
+          // console.log("dreamlog where user = $1", queryResult.rows);
           callback(error, queryResult.rows);
           // console.log("inside dbpool", queryResult.rows[0]);
         }
@@ -108,10 +79,8 @@ module.exports = (dbPoolInstance) => {
     };
     
     return {
-        homepage,
         createEntry,
         createUser,
-        userPage,
         loginUser,
         userDreamsPage
     };

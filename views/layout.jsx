@@ -4,6 +4,13 @@ const React = require("react");
 
 class Layout extends React.Component {
     render() {
+        // let navBar = "<a href=\"/add\">Add Dreams</a>";
+        console.log('does data pass hello', this.props.dreams)
+        console.log('does data pass hello', this.props.dream)
+        console.log('current user in layout', this.props.currentuser);
+        // if (this.props.userinfo.username !== this.props.currentuser) {
+        //   navBar =  <div class="nav_bar">home  |  profile  |  add dream | log out</div>;
+        // }
         return (
             <html>
                 <head>
@@ -20,8 +27,7 @@ class Layout extends React.Component {
                                 </span>
                             </div>
                             <div class="create_dream">
-                                {/* {this.props.dreams.username} */}
-                                home  |  profile  |  add dream | log out
+                                <a href="/add">+++</a> | <a href="/logout">Log Out</a>
                             </div>
                         </div>
                         <div class="content">
