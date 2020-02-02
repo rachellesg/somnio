@@ -4,17 +4,23 @@ const Layout = require("./layout");
 class Home extends React.Component {
   render() {
     //console.log(this.props.dreams.name); // no works
-    console.log(this.props.currentuser); // no works
-    let listOfDreams = "User has no dreams!";
+    console.log('in jsx', this.props.userinfo); // no works
+    console.log('dreams', this.props.dreams)
     // console.log("this dreams", this.props.dreams) // works
-    if (this.props.dreams !== null) {
+    let listOfDreams = "User has no dreams!";
+    if (this.props.dreams !== null || this.props.dreams !== undefined) {
       listOfDreams = this.props.dreams.map(item => {
         return <div class="user-profile-cards-dream"> <img src={item.dreamimage} />  Title: {item.dreamname} <br/> {item.dreamdescription}</div>
       });
+    } else {
+      listOfDreams = "User has no dreams!";
     }
+    let followUrl = "/dreamers/" + this.props.userinfo.userid + "/follow";
     let followButton = "put edit button here";
-    if (this.props.userinfo.username !== this.props.currentuser) {
-      followButton =  <div class="button-follow">+ Follow</div>;
+    if (this.props.userinfo !== undefined) {
+      if (this.props.userinfo.username !== this.props.currentuser) {
+        followButton =  <a href={followUrl}><div class="button-follow">+ Follow</div></a>;
+      }
     }
     //console.log(listOfDreams)
     return (

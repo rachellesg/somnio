@@ -547,7 +547,19 @@ transform: scale(1);
     margin: 20px auto;
 }
 
+/* SINGLE DREAM */
 
+.dream-profile {
+    margin: 20px auto;
+}
+
+.dream-profile-image {
+    max-width: 50px;
+}
+
+.dream-profile-description {
+    background: #a790bc22;
+}
 
 footer {
     font-size: 15px;

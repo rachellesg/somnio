@@ -12,8 +12,14 @@ class Home extends React.Component {
               <h1>dream #{this.props.dreams.dreamid} - <span class="user-name">{this.props.dreams.dreamname}</span></h1>
             </div>
           </div>
-         <img class="dream-profile-image" src={this.props.dreams.dreamimage}/><br></br>
-            {this.props.dreams.dreamdescription}, {this.props.dreams.dreamcategory}
+        <div class="dream-profile">
+          <img class="dream-profile-image" src={this.props.dreams.dreamimage}/> {this.props.dreams.dreamcategory} <br />
+          <h2>the story...</h2>
+          <div class="dream-profile-description">
+            {this.props.dreams.dreamdescription}
+          </div>
+        </div>
+         
         </div>
       </Layout>
     );

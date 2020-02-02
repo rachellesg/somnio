@@ -47,8 +47,7 @@ module.exports = (dbPoolInstance) => {
     }
 
     let userDreamsPage = (data, callback) => {
-      let query = 'SELECT users.id AS userID, users.username AS username, dream_log.name AS dreamname, dream_log.description AS dreamdescription, dream_log.category AS dreamcategory, dream_log.private AS dreamprivacy, dream_categories.image AS dreamImage FROM users INNER JOIN dream_log ON (users.id = dream_log.user_id) INNER JOIN dream_categories ON (dream_log.category = dream_categories.name) WHERE users.id=$1;'
-      // let query = 'SELECT * FROM dream_log WHERE user_id=$1'
+      let query = 'SELECT id AS userID, username AS username FROM users WHERE id=$1'
       let values = [data.id];
       console.log("user values:", values);
       dbPoolInstance.query(query, values, (error, queryResult) => {
@@ -57,8 +56,21 @@ module.exports = (dbPoolInstance) => {
           callback(error, null);
         } else {
           // console.log("dreamlog where user = $1", queryResult.rows);
-          callback(error, queryResult.rows);
-          // console.log("inside dbpool", queryResult.rows[0]);
+          // callback(error, queryResult.rows);
+          let query2 = 'SELECT users.id AS userID, users.username AS username, dream_log.name AS dreamname, dream_log.description AS dreamdescription, dream_log.category AS dreamcategory, dream_log.private AS dreamprivacy, dream_categories.image AS dreamImage FROM users INNER JOIN dream_log ON (users.id = dream_log.user_id) INNER JOIN dream_categories ON (dream_log.category = dream_categories.name) WHERE users.id=$1;'
+          let values2 = [data.id];
+          dbPoolInstance.query(query2, values2, (err, result) => {
+            if (err) {
+              callback(err, null);
+            } else {
+              const results = {
+                queryResult: queryResult.rows[0],
+                result: result.rows
+              }
+              // console.log("inside dbpool", results);
+              callback(error, results);
+            }
+          })
         }
       });
     }
@@ -94,13 +106,23 @@ module.exports = (dbPoolInstance) => {
         }
       });
     };
+
+    let followUser = (data, callback) => {
+      let query = 'INSERT INTO followers (user_id, follower_id) VALUES ($1, $2) RETURNING *'
+      let values = [data.followid, data.userid];
+    }
+
+    let unfollowUser = (data, callback) => {
+
+    }
     
     return {
         createEntry,
         createUser,
         loginUser,
         userDreamsPage,
-        dreamsPage
+        dreamsPage,
+        followUser
     };
   };
   

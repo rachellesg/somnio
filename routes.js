@@ -22,9 +22,10 @@ module.exports = (app, allModels) => {
 
     app.get('/login', somnioControllers.login);
     app.get('/logout', somnioControllers.logoutUser);
-    app.get('/profile', somnioControllers.userPage);
-    app.post('/profile', somnioControllers.loginUser);
-    app.get('/profile/:id', somnioControllers.userPage);
+    app.post('/dreamers', somnioControllers.loginUser);
+    app.get('/dreamers', somnioControllers.userPage);
+    app.get('/dreamers/:id', somnioControllers.userPage);
+    app.get('/dreamers/:id/follow', somnioControllers.followUser);
     app.get('/dreams/:id', somnioControllers.dreamsPage);
   };
   

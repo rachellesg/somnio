@@ -14,7 +14,7 @@ module.exports = (db) => {
       console.log("controller user id", userID);
       if (hashedLogin === sha256(SALT + request.cookies.userID)) {
         console.log("user logged in verified");
-        response.redirect('profile/'+userID);
+        response.redirect('dreamers/'+userID);
       } else {
         response.render('index');
       }
@@ -27,7 +27,7 @@ module.exports = (db) => {
       console.log("controller user id", userID);
       if (hashedLogin === sha256(SALT + request.cookies.userID)) {
         console.log("user logged in verified");
-        response.redirect('profile/'+userID);
+        response.redirect('dreamers/'+userID);
       } else {
         response.render('register');
       }
@@ -54,7 +54,7 @@ module.exports = (db) => {
           response.cookie("userID", userID);
           response.cookie("username", username);
           response.cookie("loggedIn", hashedLogin);
-          response.render('user', data)
+          response.redirect('dreamers/'+userID);
         }
       });
     }
@@ -65,20 +65,20 @@ module.exports = (db) => {
       const data = {
         id: userID
       }
-      console.log('userid', userID);
-      db.somnio.userDreamsPage(data, (error,result) => {
+      // console.log('userid', userID);
+      db.somnio.userDreamsPage(data, (error,results) => {
         const currentUser = request.cookies.username;
         let data = {
           currentuser: currentUser,
-          dreams: result,
-          userinfo: result[0]
+          dreams: results.result,
+          userinfo: results.queryResult
         }
         console.log("controller", data)
         response.render('public-profile', data)
       })
     }
 
-    // loading user's profile page
+    // loading dreamss profile page
     let dreamsPage = (request, response) => {
       let dreamId = request.params.id;
       const data = {
@@ -102,7 +102,7 @@ module.exports = (db) => {
       const hashedLogin = request.cookies.loggedIn;
       if (hashedLogin === sha256(SALT + request.cookies.userID)) {
         console.log("user logged in verified");
-        response.redirect('profile/'+userID);
+        response.redirect('dreamers/'+userID);
       } else {
         response.render('login');
       }
@@ -122,24 +122,28 @@ module.exports = (db) => {
           const userID = result.id;
           const username = result.username;
           const hashedLogin = sha256(SALT + result.id);
-          let data = {
-            dreams: result
-          }
           console.log(result)
           response.cookie('userID', userID);
           response.cookie('username', username);
           response.cookie("loggedIn", hashedLogin);
-          response.redirect('profile/'+userID);
+          response.redirect('dreamers/'+userID);
         }
       });
     }
 
     let logoutUser = (request, response) => {
-      response.clearcookie('userID', userID);
-      response.clearcookie('username', username);
-      response.clearcookie("loggedIn", hashedLogin);
-      console.log(userID, username, hashedLogin)
-      response.redirect("/");
+      const hashedLogin = request.cookies.loggedIn;
+      const userID = request.cookies.userID;
+      if (hashedLogin === undefined) {
+        console.log('not logged in');
+        response.redirect("/login");
+      } else {
+        response.clearCookie('userID');
+        response.clearCookie('username');
+        response.clearCookie("loggedIn");
+        console.log(userID, username, hashedLogin)
+        response.redirect("/");
+      }
     };
 
     // render CREATE dream entry page
@@ -179,12 +183,26 @@ module.exports = (db) => {
       db.somnio.createEntry(data, (error, result) => {
         console.log(data)
         const userID = request.cookies.userID;
-        response.redirect('/profile/'+userID);
+        response.redirect('/dreamers/'+userID);
       });
     }
 
+    // editing dreams
     let editDreams = (request, response) => {
       
+    }
+
+    // delete dreams
+
+    // follow users
+    let followUser = (request, response) => {
+      let currentUser = request.cookies.username;
+      let followUser = request.params.id;
+      let data = {
+        userid: currentUser, // current user who is following
+        followid: followUser // who follows this user
+      }
+      console.log(currentUser, followUser);
     }
 
     /**
@@ -202,7 +220,8 @@ module.exports = (db) => {
         login,
         loginUser,
         logoutUser,
-        dreamsPage
+        dreamsPage,
+        followUser
     };
   
   }
