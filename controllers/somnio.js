@@ -15,6 +15,8 @@ module.exports = (db) => {
       if (hashedLogin === sha256(SALT + request.cookies.userID)) {
         console.log("user logged in verified");
         response.redirect('profile/'+userID);
+      } else {
+        response.render('index');
       }
     }
 
@@ -65,14 +67,32 @@ module.exports = (db) => {
       }
       console.log('userid', userID);
       db.somnio.userDreamsPage(data, (error,result) => {
-      const currentUser = request.cookies.username;
-      let data = {
-        currentuser: currentUser,
-        dreams: result,
-        userinfo: result[0]
+        const currentUser = request.cookies.username;
+        let data = {
+          currentuser: currentUser,
+          dreams: result,
+          userinfo: result[0]
+        }
+        console.log("controller", data)
+        response.render('public-profile', data)
+      })
+    }
+
+    // loading user's profile page
+    let dreamsPage = (request, response) => {
+      let dreamId = request.params.id;
+      const data = {
+        id: dreamId
       }
-      console.log("controller", data)
-      response.render('public-profile', data)
+      console.log('dreamid', data);
+      db.somnio.dreamsPage(data, (error,result) => {
+        const currentUser = request.cookies.username;
+        let data = {
+          currentuser: currentUser,
+          dreams: result[0]
+        }
+        console.log("controller", data)
+        response.render('single-dream', data)
       })
     }
 
@@ -109,14 +129,16 @@ module.exports = (db) => {
           response.cookie('userID', userID);
           response.cookie('username', username);
           response.cookie("loggedIn", hashedLogin);
-          response.render('user', data);
+          response.redirect('profile/'+userID);
         }
       });
     }
 
     let logoutUser = (request, response) => {
-      response.clearCookie("userID");
-      response.clearCookie("loggedIn");
+      response.clearcookie('userID', userID);
+      response.clearcookie('username', username);
+      response.clearcookie("loggedIn", hashedLogin);
+      console.log(userID, username, hashedLogin)
       response.redirect("/");
     };
 
@@ -134,7 +156,7 @@ module.exports = (db) => {
         console.log(username, userID)
         response.render('create-entry', data);
       } else {
-        response.render('login');
+        response.redirect('login');
       }
     }
 
@@ -179,7 +201,8 @@ module.exports = (db) => {
         userPage,
         login,
         loginUser,
-        logoutUser
+        logoutUser,
+        dreamsPage
     };
   
   }

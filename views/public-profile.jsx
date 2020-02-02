@@ -9,7 +9,7 @@ class Home extends React.Component {
     // console.log("this dreams", this.props.dreams) // works
     if (this.props.dreams !== null) {
       listOfDreams = this.props.dreams.map(item => {
-        return <div class="user-profile-cards-dream">Title:<br />{item.dreamname} <br/> {item.dreamdescription}</div>
+        return <div class="user-profile-cards-dream"> <img src={item.dreamimage} />  Title: {item.dreamname} <br/> {item.dreamdescription}</div>
       });
     }
     let followButton = "put edit button here";
@@ -28,6 +28,7 @@ class Home extends React.Component {
               {followButton}
             </div>
           </div>
+          <h2><img class="h2-icon" src="/images/dreamcatcher.png"/> dreamers are as what dreamers do</h2>
           <div class="user-profile-cards">
             {listOfDreams}
           </div>

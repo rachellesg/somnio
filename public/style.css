@@ -94,10 +94,20 @@ h1 {
     font-family: 'BentonModDisp BD';
 }
 
+h2 {
+    color: #f6ffdb;    
+    background: #a790bc22;
+}
+
 .h1-icon {
     width: 30px;
     display: inline-block;
     transform: translateY(-15px);
+}
+.h2-icon {
+    width: 30px;
+    display: inline-block;
+    transform: translateY(5px);
 }
 
 .welcome-screen {
@@ -332,8 +342,15 @@ transform: scale(1);
 }
 
 .user-profile-cards-dream {
-    flex: 1 1 33%;
+    /* flex: 1 1 50%; */
     margin-bottom: 20px;
+    background: #a790bc44;
+    padding: 20px;
+}
+
+.user-profile-cards-dream img {
+    width: 35px;
+    height: 35px;
 }
 
 .user-name {
@@ -528,4 +545,10 @@ transform: scale(1);
 
 .index-actions {
     margin: 20px auto;
+}
+
+
+
+footer {
+    font-size: 15px;
 }

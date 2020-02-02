@@ -14,7 +14,7 @@ class Layout extends React.Component {
         return (
             <html>
                 <head>
-                    <title>{this.props.pagetitle}</title>
+                    <title>somniō</title>
                     <link rel="stylesheet" href="/style.css"/>
                     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/normalize/8.0.1/normalize.css" />
                 </head>
@@ -33,6 +33,9 @@ class Layout extends React.Component {
                         <div class="content">
                             {this.props.children}
                         </div>
+                        <footer>
+                            &copy; Rachelle // somniō 2020
+                        </footer>
                     </div>
                 </body>
             </html>
