@@ -1,7 +1,9 @@
-# Somnio
-
+# somniō
 
 ## The App
+A dream is a succession of images, ideas, emotions, and sensations that usually occur involuntarily in the mind during certain stages of sleep. The content and purpose of dreams are not fully understood, although they have been a topic of scientific, philosophical and religious interest throughout recorded history. 
+
+[**somniō**](http://rachelles-somnio.herokuapp.com) is a personal project created based on my personal experience with having vivid dreams, with this app I am able to quickly log my dreams down as phones are one of the first things we reach for in the morning once we are awake.
 
 ### Phase 1 (MVP)
 - [x]  Creating entry
