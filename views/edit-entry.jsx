@@ -4,7 +4,7 @@ const Layout = require("./layout");
 class Home extends React.Component {
   render() {
     let loggedIn = this.props.loggedIn;
-    const id = this.props.artists.id;
+    const id = this.props.dreams.id;
     const actionUrl = "/dreams/"+id+"?_method=put";
     return (
       <Layout loggedIn={loggedIn}>

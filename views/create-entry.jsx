@@ -11,9 +11,9 @@ class Home extends React.Component {
         <form action="/dreams/add" autocomplete="off" method="POST">
             <div class="form-row">
                 <div class="label-name">Visibility:</div> 
-                <select>
-                    <option name="private" value="true">Private</option>
-                    <option name="private" value="false">Public</option>
+                <select name="private">
+                    <option value="true">Private</option>
+                    <option value="false">Public</option>
                 </select>
             </div>
             <div class="form-row form-row-text">

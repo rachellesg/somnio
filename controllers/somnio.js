@@ -50,22 +50,20 @@ module.exports = (db) => {
 
     // create users
     let createUser = (request, response) => {
+      let chosenuser = request.body.username;
+      let username = chosenuser.toLowerCase();
       const data = {
-        username: request.body.username,
+        username: username,
         password: request.body.password
       }
       db.somnio.createUser(data, (error, result) => {
         if (error) {
           console.log(error)
-          response.send('404')
+          response.redirect('/error')
         } else {
           const userID = result.id;
           const username = result.username;
           const hashedLogin = sha256(SALT + result.id);
-          let data = {
-            username: result.username
-          }
-          console.log("print", result.username)
           response.cookie("userID", userID);
           response.cookie("username", username);
           response.cookie("loggedIn", hashedLogin);
@@ -90,7 +88,10 @@ module.exports = (db) => {
         id: userID
       }
       // console.log('userid', userID);
-      db.somnio.userDreamsPage(data, (error,results) => {
+      db.somnio.userDreamsPage(data, (error, results) => {
+        if (request.params.id === undefined) {
+          console.log("no user")
+        }
         const currentUser = request.cookies.username;
         const currentUserID = request.cookies.userID;
         let data = {
@@ -101,26 +102,42 @@ module.exports = (db) => {
           userinfo: results.queryResult,
         }
         db.somnio.checkFollow(data, (error, result) => {
-          console.log("check follow results", result)
+          console.log("check follow results", results)
           if (result !== undefined) {
+            // let stringDate;
+            // if (results.result[0].dreamcreated === undefined) {
+            //   stringDate = "HELLO"
+            // } else {
+            //   let date = results.result[0].dreamcreated;
+            //   stringDate = date.toString().split(" ").slice(0, 4).join(" ");
+            // }
             let data = {
               following: true,
               currentuser: currentUser,
               userid: currentUserID,
               followid: results.queryResult.userid,
               dreams: results.result,
+              // date: stringDate,
               userinfo: results.queryResult,
               loggedIn: true
             }
-            console.log("print results::", data);
+            // console.log("PRINT THIS DATE PLEASE", date);
             response.render('public-profile', data)
           } else {
+            // let stringDate;
+            // if (results.result[0].dreamcreated === undefined) {
+            //   stringDate = "HELLO"
+            // } else {
+            //   let date = results.result[0].dreamcreated;
+            //   stringDate = date.toString().split(" ").slice(0, 4).join(" ");
+            // }
             let data = {
               following: false,
               currentuser: currentUser,
               userid: currentUserID,
               followid: results.queryResult.userid,
               dreams: results.result,
+              // date: stringDate,
               userinfo: results.queryResult,
               loggedIn: true
             }
@@ -148,12 +165,16 @@ module.exports = (db) => {
             response.redirect('/error');
             console.log("no such dream");
           } else {
+            let date = result[0].dreamcreated;
+            stringDate = date.toString().split(" ").slice(0, 4).join(" ");
             let data = {
               currentuser: currentUser,
               dreams: result[0],
+              date: stringDate,
               loggedIn: true
             }
-            console.log("controller", data)
+            console.log("print string date", stringDate)
+            console.log("controller", result[0])
             response.render('single-dream', data)
           }
         })
@@ -165,9 +186,13 @@ module.exports = (db) => {
     // loading ALL DREAMS
     let allDreamsPage = (request, response) => {
       db.somnio.allDreamsPage((error, result) => {
+        let date = result[0].dreamcreated;
+        console.log("this date exists");
+        stringDate = date.toString().split(" ").slice(0, 4).join(" ");
         let data = {
           dreams: result,
-          loggedIn: true,
+          date: stringDate,
+          loggedIn: true
         }
         console.log("data in alldreams", data);
         response.render('dreams', data)
@@ -195,7 +220,7 @@ module.exports = (db) => {
       db.somnio.loginUser(data, (error, result) => {
         if (error) {
           console.log(error)
-          response.send('404')
+          response.redirect('/error');
         } else {
           const userID = result.id;
           const username = result.username;

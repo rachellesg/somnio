@@ -14,11 +14,12 @@ class Home extends React.Component {
               <img src={item.dreamimage} />
             </div> 
             <div class="dream-cards-title">
-              <a href={dreamsUrl}>{item.dreamname} </a>
+              <a href={dreamsUrl}>{item.dreamname}</a>
             </div>
           </div>
-          {item.dreamdescription}
-          <div class="dream-cards-posted">Posted by: <a href={userUrl}>{item.username}</a></div> 
+          {/* {item.dreamdescription} */}
+          <div class="dream-cards-posted">Posted by: <a href={userUrl}>{item.username}</a>
+          <br />posted on: <span class="user-profile-date">{this.props.date}</span></div> 
           </div>
       });
     //console.log(listOfDreams)

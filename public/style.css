@@ -96,11 +96,13 @@ h1 {
     color: #a790bc;
     line-height: 35px;
     font-family: 'BentonModDisp BD';
+    width: 100%;
+    margin-bottom: 10px !important;
 }
 
 h2 {
     color: #f6ffdb;    
-    background: #a790bc22;
+    /* background: #a790bc22; */
 }
 
 .h1-icon {
@@ -345,6 +347,14 @@ transform: scale(1);
     flex-wrap: wrap;
 }
 
+.user-profile-posted {
+    font-size: 18px;
+}
+
+.user-profile-date {
+    border-bottom: 1px solid;
+}
+
 .user-profile-cards-dream {
     /* flex: 1 1 50%; */
     margin-bottom: 20px;
@@ -354,8 +364,8 @@ transform: scale(1);
 }
 
 .user-profile-cards-dream img {
-    width: 35px;
-    height: 35px;
+    width: 30px;
+    height: 30px;
 }
 
 .user-name {
@@ -577,7 +587,8 @@ transform: scale(1);
 }
 
 .dream-profile-image {
-    max-width: 50px;
+    max-width: 30px;
+    align-item: center;
 }
 
 .dream-profile-description {
@@ -586,6 +597,7 @@ transform: scale(1);
 
 .dream-cards-posted {
     font-size: 16px;
+    line-height: 18px;
     text-align: right;
 }
 

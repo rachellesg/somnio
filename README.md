@@ -4,21 +4,23 @@
 ## The App
 
 ### Phase 1 (MVP)
-* Creating entry
-* User register + log in + log out 
-* User following + followers
-* Able to see each individual dream
-* Able to see each individual profile
+- [x]  Creating entry
+- [x]  User register + log in + log out 
+- [x]  User following + followers
+- [x]  Able to see each individual dream
+- [x]  Able to see each individual profile
 
 ### Phase 2 (Further) 
-* Navbar to differ based on logged in 
-* Linking each dream and profile 
-* Edit user profile
-* Delete dreams
+- [x]  Navbar to differ based on logged in 
+- [x]  Linking each dream and profile 
+- [ ]  Edit user profile
+- [x]  Delete dreams
+- [ ]  See posts of people user is following
 
 ### Phase 3 (Further)
-* Sort dreams by category, date
-* Search dreams or user
+- [ ]  Sort dreams by category, date
+- [ ]  Search dreams or user
+- [ ]  Setting error pages
 
 ## Application Development Process
 ### Built With

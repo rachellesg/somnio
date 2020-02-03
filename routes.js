@@ -24,6 +24,7 @@ module.exports = (app, allModels) => {
     app.post('/dreamers', somnioControllers.loginUser);
     app.get('/dreamers', somnioControllers.userPage);
     app.get('/dreamers/:id', somnioControllers.userPage);
+    
     app.get('/dreamers/:id/follow', somnioControllers.followUser);
     app.delete('/dreamers/:id/unfollow', somnioControllers.unfollowUser);
 

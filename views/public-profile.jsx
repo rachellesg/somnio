@@ -4,14 +4,26 @@ const Layout = require("./layout");
 class Home extends React.Component {
   render() {
     let loggedIn = this.props.loggedIn;
-    let listOfDreams;
+    let username = this.props.userinfo.username;
+    let currentuser = this.props.currentuser;
+    let display;
+    let listOfDreams = "User has no dreams";
+    console.log(username, currentuser)
     if (this.props.dreams !== null || this.props.dreams !== undefined) {
       listOfDreams = this.props.dreams.map(item => {
-        return <div class="user-profile-cards-dream"> <img src={item.dreamimage} />  Title: {item.dreamname} <br/> {item.dreamdescription}</div>
+        // if (username === currentuser) {
+        //   console.log("yes user")
+        // } else {
+        //   console.log("no user")
+        // }
+        if (item.dreamprivacy === true) {
+          display = "none";
+          console.log("private")
+        }
+        let dreamsUrl = "/dreams/"+item.dreamid;
+        return <div class="user-profile-cards-dream" style={{display}}> <img src={item.dreamimage} />  Title: <a href={dreamsUrl}>{item.dreamname}</a> <br /> posted on: <span class="user-profile-date">{this.props.date}</span> </div>
       });
-    } else {
-      listOfDreams = "User has no dreams!";
-    }
+    } 
     let followButton;
     console.log("if following", this.props.following)
     if (this.props.following === true) {
@@ -26,7 +38,8 @@ class Home extends React.Component {
           let followUrl = "/dreamers/" + this.props.userinfo.userid + "/follow";
           followButton =  <a href={followUrl}><div class="button-follow">+ Follow</div></a>;
         } else {
-          followButton = "put edit button here";
+          let followUrl = "/dreamers/" + this.props.userinfo.userid + "/edit";
+          followButton = <a href={followUrl}><div class="button-follow">Edit</div></a>;
         }
       }
     }
