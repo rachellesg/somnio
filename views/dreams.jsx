@@ -4,11 +4,20 @@ const Layout = require("./layout");
 class Home extends React.Component {
   render() {
     let loggedIn = this.props.loggedIn;
-    // console.log("detect logged in", loggedIn) // this WORKS
+    let username = this.props.dreams.username;
+    let currentuser = this.props.currentuser;
+    let display;
+    console.log(username, currentuser)
     let listOfDreams = this.props.dreams.map(item => {
         let userUrl = "/dreamers/"+item.userid;
         let dreamsUrl = "/dreams/"+item.dreamid;
-        return <div class="user-profile-cards-dream">
+        if (item.dreamprivacy === true) {
+          display = "none";
+          console.log("private")
+        } else {
+          display = "inline-block";
+        }
+        return <div class="user-profile-cards-dream" style={{display}}>
           <div class="dream-cards-details">
             <div class="dream-cards-image">
               <img src={item.dreamimage} />

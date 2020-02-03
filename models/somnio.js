@@ -93,7 +93,9 @@ module.exports = (dbPoolInstance) => {
     }
 
     let allDreamsPage = (callback) => {
-      let query = 'SELECT users.id AS userID, users.username as username, dream_log.id as dreamid, dream_log.name AS dreamname, dream_log.description AS dreamdescription, dream_log.category AS dreamcategory, dream_log.private AS dreamprivacy, dream_categories.image AS dreamImage, dream_log.created_at AS dreamcreated FROM dream_log INNER JOIN dream_categories ON (dream_log.category = dream_categories.name) INNER JOIN users ON (users.id = dream_log.user_id) ORDER BY dream_log.created_at DESC;'
+      let query = 'SELECT users.id AS userID, users.username as username, dream_log.id as dreamid, dream_log.name AS dreamname, dream_log.description AS dreamdescription, dream_log.category AS dreamcategory, dream_log.private AS dreamprivacy, dream_categories.image AS dreamImage, dream_log.created_at AS dreamcreated FROM dream_log INNER JOIN dream_categories ON (dream_log.category = dream_categories.name) INNER JOIN users ON (users.id = dream_log.user_id);'
+
+      // ORDER BY dream_log.created_at DESC
       dbPoolInstance.query(query, (error, queryResult) => {
         if (error) {
           // invoke callback function with results after query has executed

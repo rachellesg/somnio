@@ -104,40 +104,42 @@ module.exports = (db) => {
         db.somnio.checkFollow(data, (error, result) => {
           console.log("check follow results", results)
           if (result !== undefined) {
-            // let stringDate;
-            // if (results.result[0].dreamcreated === undefined) {
-            //   stringDate = "HELLO"
-            // } else {
-            //   let date = results.result[0].dreamcreated;
-            //   stringDate = date.toString().split(" ").slice(0, 4).join(" ");
-            // }
+            let stringDate;
+            console.log("DREAM CREATED SRESULT", results.result[0])
+            if (results.result[0] === undefined) {
+              stringDate = "HELLO"
+            } else {
+              let date = results.result[0].dreamcreated;
+              stringDate = date.toString().split(" ").slice(0, 4).join(" ");
+            }
             let data = {
               following: true,
               currentuser: currentUser,
               userid: currentUserID,
               followid: results.queryResult.userid,
               dreams: results.result,
-              // date: stringDate,
+              date: stringDate,
               userinfo: results.queryResult,
               loggedIn: true
             }
+            console.log(results.queryResult.userid);
             // console.log("PRINT THIS DATE PLEASE", date);
             response.render('public-profile', data)
           } else {
-            // let stringDate;
-            // if (results.result[0].dreamcreated === undefined) {
-            //   stringDate = "HELLO"
-            // } else {
-            //   let date = results.result[0].dreamcreated;
-            //   stringDate = date.toString().split(" ").slice(0, 4).join(" ");
-            // }
+            let stringDate;
+            if (results.result[0] === undefined) {
+              stringDate = "HELLO"
+            } else {
+              let date = results.result[0].dreamcreated;
+              stringDate = date.toString().split(" ").slice(0, 4).join(" ");
+            }
             let data = {
               following: false,
               currentuser: currentUser,
               userid: currentUserID,
               followid: results.queryResult.userid,
               dreams: results.result,
-              // date: stringDate,
+              date: stringDate,
               userinfo: results.queryResult,
               loggedIn: true
             }
@@ -185,11 +187,13 @@ module.exports = (db) => {
 
     // loading ALL DREAMS
     let allDreamsPage = (request, response) => {
+      const currentUser = request.cookies.username;
       db.somnio.allDreamsPage((error, result) => {
         let date = result[0].dreamcreated;
         console.log("this date exists");
         stringDate = date.toString().split(" ").slice(0, 4).join(" ");
         let data = {
+          currentuser: currentUser,
           dreams: result,
           date: stringDate,
           loggedIn: true

@@ -4,24 +4,31 @@ const Layout = require("./layout");
 class Home extends React.Component {
   render() {
     let loggedIn = this.props.loggedIn;
-    let username = this.props.userinfo.username;
     let currentuser = this.props.currentuser;
     let display;
     let listOfDreams = "User has no dreams";
-    console.log(username, currentuser)
     if (this.props.dreams !== null || this.props.dreams !== undefined) {
+      let username = this.props.userinfo.username;
       listOfDreams = this.props.dreams.map(item => {
-        // if (username === currentuser) {
-        //   console.log("yes user")
-        // } else {
-        //   console.log("no user")
-        // }
-        if (item.dreamprivacy === true) {
-          display = "none";
-          console.log("private")
+        if (username === currentuser) {
+          console.log("yes user")
+        } else {
+          if (item.dreamprivacy === true) {
+            display = "none";
+            console.log("private")
+          } else {
+            display = "inline-block";
+          }
         }
         let dreamsUrl = "/dreams/"+item.dreamid;
-        return <div class="user-profile-cards-dream" style={{display}}> <img src={item.dreamimage} />  Title: <a href={dreamsUrl}>{item.dreamname}</a> <br /> posted on: <span class="user-profile-date">{this.props.date}</span> </div>
+        return <div class="user-profile-cards-dream" style={{display}}> <div class="dream-cards-details">
+        <div class="dream-cards-image">
+          <img src={item.dreamimage} />
+        </div> 
+        <div class="dream-cards-title">
+          <a href={dreamsUrl}>{item.dreamname}</a>
+        </div>
+      </div> posted on: <span class="user-profile-date">{this.props.date}</span> </div>
       });
     } 
     let followButton;
