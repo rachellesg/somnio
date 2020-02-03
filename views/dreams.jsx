@@ -35,7 +35,7 @@ class Home extends React.Component {
     return (
       <Layout loggedIn={loggedIn}>
         <div class="user-profile">
-          <h2><img class="h2-icon" src="/images/dreamcatcher.png"/> all listed dreams</h2>
+          <h2><img class="h2-icon" src="/images/dreamcatcher.png"/> all publicly listed dreams</h2>
           <div class="user-profile-cards">
             {listOfDreams}
           </div>

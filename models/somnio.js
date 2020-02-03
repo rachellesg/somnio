@@ -25,6 +25,37 @@ module.exports = (dbPoolInstance) => {
       });
     }
 
+    let checkUser = (data, callback) => {
+      let query = 'SELECT * FROM users WHERE id=$1';
+      let values = [data.userID];
+      // console.log(values)
+      dbPoolInstance.query(query, values, (error, queryResult) => {
+        if (error) {
+          callback(error, null);
+        }
+        else {
+          callback(error, queryResult.rows);
+          console.log(queryResult.rows)
+        }
+      })
+    }
+
+    let editUser = (data, callback) => {
+      let query = 'UPDATE users SET username=$2, password=$3 WHERE id=$1';
+      let password = sha256(data.password + SALT);
+      let values = [data.username, password];
+      console.log(values);
+      dbPoolInstance.query(query, values, (error, queryResult) => {
+        if (error) {
+          // invoke callback function with results after query has executed
+          callback(error, null);
+        } else {
+          callback(error, queryResult.rows[0]);
+          // console.log(queryResult.rows[0].password);
+        }
+      });
+    }
+
     let loginUser = (data, callback) => {
       let query = 'SELECT * FROM users WHERE username=$1';
       let values = [data.username];
@@ -180,6 +211,8 @@ module.exports = (dbPoolInstance) => {
         createEntry,
         deleteEntry,
         createUser,
+        checkUser,
+        editUser,
         loginUser,
         allDreamsPage,
         userDreamsPage,

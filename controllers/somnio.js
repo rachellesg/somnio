@@ -254,6 +254,52 @@ module.exports = (db) => {
       }
     };
 
+    // render EDIT form
+    let editUser = (request, response) => {
+      const hashedLogin = request.cookies.loggedIn;
+      if (hashedLogin === sha256(SALT + request.cookies.userID)) {
+        const userID = parseInt(request.params.id);
+        let data = {
+          userID: userID
+        }
+        db.somnio.checkUser(data, (error, result) => {
+          let data = {
+            userinfo: result[0],
+            loggedIn: true
+          }
+          console.log("printed", data)
+          response.render('edit', data);
+        });
+        // response.render(data)
+      } else {
+        response.redirect('login');
+      }
+    }
+
+    // send EDIT information
+    let updateUser = (request, response) => {
+      const hashedLogin = request.cookies.loggedIn;
+      if (hashedLogin === sha256(SALT + request.cookies.userID)) {
+        const userID = parseInt(request.params.id);
+        let data = {
+          userID: userID,
+          username: request.body.username,
+          password: request.body.password
+        }
+        db.somnio.editUser(data, (error, result) => {
+          let data = {
+            userinfo: result,
+            loggedIn: true
+          }
+          console.log("printed", data)
+          response.redirect('/dreamers/'+userID);
+        });
+        // response.render(data)
+      } else {
+        response.redirect('login');
+      }
+    }
+
     // render CREATE dream entry page
     let addDreams = (request,response) => {
       const userID = request.cookies.userID;
@@ -342,7 +388,7 @@ module.exports = (db) => {
             loggedIn: true
           }
           console.log("result", data);
-          // response.redirect('/dreamers/'+result.user_id);
+          response.redirect('/dreamers/'+result.user_id);
         })
       } else {
         response.redirect("/login");
@@ -380,6 +426,7 @@ module.exports = (db) => {
         createDreams,
         register,
         createUser,
+        editUser,
         userPage,
         login,
         loginUser,
@@ -388,7 +435,8 @@ module.exports = (db) => {
         allDreamsPage,
         followUser,
         unfollowUser,
-        deleteDreams
+        deleteDreams,
+        updateUser
     };
   
   }

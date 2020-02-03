@@ -175,6 +175,21 @@ header {
     border-bottom: 1px solid;
 }
 
+.form-row-3 {
+    width: 70%;
+    margin-right: 20px;
+    align-items: center;
+}
+
+.form-row-3 .label-name {
+    width: 35%;
+}
+
+.form-row-1 {
+    width: 25%;
+    align-items: center;
+}
+
 .form-row-title-highlight {
     background: #2d396c;
     border-radius: 5px;
@@ -246,6 +261,24 @@ input[type="radio"] {
 label[for="angry"] {
     background: url('/images/feelings/angry.png') no-repeat center;
     background-size: contain;
+    position: relative;
+    display: inline-block;
+}
+
+label[for="angry"]:hover {
+    background: url('/images/feelings/angry-checked.png') no-repeat center;
+    background-size: contain;
+}
+
+label[for="angry"]:hover:after {
+    content: "ANGRY";
+    background: #f6ffdb;
+    color: #302340;
+    font-size: 30px;
+    position: absolute;
+    top: -32px;
+    left: -32px;
+    padding: 5px;
 }
 
 :checked + label[for="angry"] {
@@ -256,6 +289,24 @@ label[for="angry"] {
 label[for="happy"] {
     background: url('/images/feelings/happy.png') no-repeat center;
     background-size: contain;
+    position: relative;
+    display: inline-block;
+}
+
+label[for="happy"]:hover {
+    background: url('/images/feelings/happy-checked.png') no-repeat center;
+    background-size: contain;
+}
+
+label[for="happy"]:hover:after {
+    content: "HAPPY";
+    background: #f6ffdb;
+    color: #302340;
+    font-size: 30px;
+    position: absolute;
+    bottom: -32px;
+    left: -32px;
+    padding: 5px;
 }
 
 :checked + label[for="happy"] {
@@ -266,6 +317,24 @@ label[for="happy"] {
 label[for="peaceful"] {
     background: url('/images/feelings/peaceful.png') no-repeat center;
     background-size: contain;
+    position: relative;
+    display: inline-block;
+}
+
+label[for="peaceful"]:hover {
+    background: url('/images/feelings/peaceful-checked.png') no-repeat center;
+    background-size: contain;
+}
+
+label[for="peaceful"]:hover:after {
+    content: "PEACEFUL";
+    background: #f6ffdb;
+    color: #302340;
+    font-size: 30px;
+    position: absolute;
+    top: -32px;
+    left: -32px;
+    padding: 5px;
 }
 
 :checked + label[for="peaceful"] {
@@ -276,6 +345,24 @@ label[for="peaceful"] {
 label[for="scared"] {
     background: url('/images/feelings/scared.png') no-repeat center;
     background-size: contain;
+    position: relative;
+    display: inline-block;
+}
+
+label[for="scared"]:hover {
+    background: url('/images/feelings/scared-checked.png') no-repeat center;
+    background-size: contain;
+}
+
+label[for="scared"]:hover:after {
+    content: "SCARED";
+    background: #f6ffdb;
+    color: #302340;
+    font-size: 30px;
+    position: absolute;
+    bottom: -32px;
+    left: -32px;
+    padding: 5px;
 }
 
 :checked + label[for="scared"] {
@@ -286,6 +373,24 @@ label[for="scared"] {
 label[for="worried"] {
     background: url('/images/feelings/worried.png') no-repeat center;
     background-size: contain;
+    position: relative;
+    display: inline-block;
+}
+
+label[for="worried"]:hover {
+    background: url('/images/feelings/worried-checked.png') no-repeat center;
+    background-size: contain;
+}
+
+label[for="worried"]:hover:after {
+    content: "WORRIED";
+    background: #f6ffdb;
+    color: #302340;
+    font-size: 30px;
+    position: absolute;
+    top: -32px;
+    left: -32px;
+    padding: 5px;
 }
 
 :checked + label[for="worried"] {
@@ -309,11 +414,28 @@ transform: scale(1);
     margin: 20px auto;
 }
 
-.button-submit {
+.button-cancel {
     padding: 10px 0px;
+    display: inline-block; 
+    margin-right: 15px;
     border: none;
     border-radius: 5px;
-    width: 250px;
+    width: 150px;
+    color: #ffffff;
+    font-size: 20px;
+    background: #777777;
+    font-family: 'BentonModDisp BD';
+}
+
+.button-cancel:hover {
+    cursor: pointer;
+}
+
+.button-submit {
+    padding: 11px 0px;
+    border: none;
+    border-radius: 5px;
+    width: 150px;
     color: #ffffff;
     font-size: 20px;
     font-family: 'BentonModDisp BD';

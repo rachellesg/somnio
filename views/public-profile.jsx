@@ -18,10 +18,11 @@ class Home extends React.Component {
             console.log("private")
           } else {
             display = "inline-block";
+            background = "#a790bc22";
           }
         }
         let dreamsUrl = "/dreams/"+item.dreamid;
-        return <div class="user-profile-cards-dream" style={{display}}> <div class="dream-cards-details">
+        return <div class="user-profile-cards-dream" style={{display}} > <div class="dream-cards-details">
         <div class="dream-cards-image">
           <img src={item.dreamimage} />
         </div> 
@@ -35,9 +36,7 @@ class Home extends React.Component {
     console.log("if following", this.props.following)
     if (this.props.following === true) {
       console.log("you follow already");
-      let unfollowUrl = "/dreamers/" + this.props.userinfo.userid;
-      // let unfollowUrl = "/dreamers/" + this.props.userinfo.userid + "/unfollow";
-      followButton = <a href={unfollowUrl}><div class="button-follow">Following</div></a>;
+      followButton = <div class="button-follow">Following</div>;
     } else {
       // console.log("not followed");
       if (this.props.userinfo !== undefined) {
