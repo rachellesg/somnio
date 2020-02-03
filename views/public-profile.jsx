@@ -4,8 +4,8 @@ const Layout = require("./layout");
 class Home extends React.Component {
   render() {
     //console.log(this.props.dreams.name); // no works
-    console.log('in jsx', this.props.userinfo); // no works
-    console.log('dreams', this.props.dreams)
+    // console.log('in jsx', this.props.userinfo); // no works
+    // console.log('dreams', this.props.dreams)
     // console.log("this dreams", this.props.dreams) // works
     let listOfDreams = "User has no dreams!";
     if (this.props.dreams !== null || this.props.dreams !== undefined) {
@@ -15,11 +15,21 @@ class Home extends React.Component {
     } else {
       listOfDreams = "User has no dreams!";
     }
-    let followUrl = "/dreamers/" + this.props.userinfo.userid + "/follow";
-    let followButton = "put edit button here";
-    if (this.props.userinfo !== undefined) {
-      if (this.props.userinfo.username !== this.props.currentuser) {
-        followButton =  <a href={followUrl}><div class="button-follow">+ Follow</div></a>;
+    let followButton;
+    console.log("if following", this.props.following)
+    if (this.props.following === true) {
+      console.log("you follow already");
+      let unfollowUrl = "/dreamers/" + this.props.userinfo.userid + "/unfollow";
+      followButton = <a href={unfollowUrl}><div class="button-follow">Unfollow</div></a>;
+    } else {
+      // console.log("not followed");
+      if (this.props.userinfo !== undefined) {
+        if (this.props.userinfo.username !== this.props.currentuser) {
+          let followUrl = "/dreamers/" + this.props.userinfo.userid + "/follow";
+          followButton =  <a href={followUrl}><div class="button-follow">+ Follow</div></a>;
+        } else {
+          followButton = "put edit button here";
+        }
       }
     }
     //console.log(listOfDreams)

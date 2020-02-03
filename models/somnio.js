@@ -49,7 +49,7 @@ module.exports = (dbPoolInstance) => {
     let userDreamsPage = (data, callback) => {
       let query = 'SELECT id AS userID, username AS username FROM users WHERE id=$1'
       let values = [data.id];
-      console.log("user values:", values);
+      // console.log("user values:", values);
       dbPoolInstance.query(query, values, (error, queryResult) => {
         if (error) {
           // invoke callback function with results after query has executed
@@ -107,13 +107,43 @@ module.exports = (dbPoolInstance) => {
       });
     };
 
+    let checkFollow = (data, callback) => {
+      let query = 'SELECT * FROM followers WHERE user_id=$1 AND follower_id=$2';
+      let values = [data.followid, data.userid];
+      dbPoolInstance.query(query, values, (error, queryResult) => {
+        if (error) {
+          callback(error, null);
+        } else {
+          callback(error,queryResult.rows[0])
+          console.log('dp pool', queryResult.rows[0])
+        }
+      })
+    }
+
     let followUser = (data, callback) => {
       let query = 'INSERT INTO followers (user_id, follower_id) VALUES ($1, $2) RETURNING *'
       let values = [data.followid, data.userid];
+      dbPoolInstance.query(query, values, (error, queryResult) => {
+        if (error) {
+          callback(error, null);
+        } else {
+          callback(error, queryResult.rows[0]);
+          console.log("inside dbpool", queryResult.rows[0]);
+        }
+      })
     }
 
     let unfollowUser = (data, callback) => {
-
+      let query = 'DELETE FROM followers WHERE user_id=$1, follow_id=$2 RETURNING *'
+      let values = [data.followid, data.userid];
+      dbPoolInstance.query(query, values, (error, queryResult) => {
+        if (error) {
+          callback(error, null);
+        } else {
+          callback(error, queryResult.rows[0]);
+          console.log("inside dbpool", queryResult.rows[0]);
+        }
+      })
     }
     
     return {
@@ -122,7 +152,9 @@ module.exports = (dbPoolInstance) => {
         loginUser,
         userDreamsPage,
         dreamsPage,
-        followUser
+        followUser,
+        unfollowUser,
+        checkFollow
     };
   };
   
