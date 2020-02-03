@@ -7,6 +7,13 @@ WE FORGET almost all dreams soon after waking up. Our forgetfulness is generally
 
 [**somniō**](http://rachelles-somnio.herokuapp.com) is a school project created based on my own experience with having frequent vivid dreams. With somniō, users can now quickly jot their dreams the moment they awaken.
 
+## Application Development Process
+### Built With
+* [NodeJS](http://nodejs.org) - Server-side Javascript
+* [Express](https://expressjs.com/) - Web Framework for Node.js
+* [React](https://reactjs.org/) - Templating engine
+* [Postgresql](https://www.postgresql.org/) - Object-relational database system
+
 ### Phase 1 (MVP)
 - [x]  Creating entry
 - [x]  User register + log in + log out 
@@ -27,13 +34,6 @@ WE FORGET almost all dreams soon after waking up. Our forgetfulness is generally
 - [ ]  Sort dreams by category, date
 - [ ]  Search dreams or user
 - [ ]  Setting error pages
-
-## Application Development Process
-### Built With
-* [NodeJS](http://nodejs.org) - Server-side Javascript
-* [Express](https://expressjs.com/) - Web Framework for Node.js
-* [React](https://reactjs.org/) - Templating engine
-* [Postgresql](https://www.postgresql.org/) - Object-relational database system
 
 ### How It Works
 
