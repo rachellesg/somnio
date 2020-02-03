@@ -200,6 +200,7 @@ header {
 .label-name {
     margin: 0 20px 0 0;
     /* width: 50%; */
+    font-family: 'BentonModDisp BD';
 }
 
 input[type="text"] {
@@ -223,6 +224,7 @@ textarea {
     resize: none;
     outline: none;
     background: transparent;
+    width: 100%;
     border: 1px solid #ffffff;
     color: #ffffff;
 }

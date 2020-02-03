@@ -6,8 +6,8 @@ class Home extends React.Component {
     let loggedIn = this.props.loggedIn;
     return (
       <Layout loggedIn={loggedIn}>
-        <h1>ADD A DREAM, {this.props.username}</h1>
-        The key to getting the most from this app lies in integrating it into your daily routine. Once you get used to recording your dreams, not only will the act of writing them down get easier but the ease with which you remember them will improve too. The more you look, the more you see.
+        <h1>add a dream entry, <span class="user-name">{this.props.username}</span></h1>
+        {/* The key to getting the most from this app lies in integrating it into your daily routine. Once you get used to recording your dreams, not only will the act of writing them down get easier but the ease with which you remember them will improve too. The more you look, the more you see. */}
         <form action="/dreams/add" autocomplete="off" method="POST">
             <div class="form-row form-row-text form-row-3">
                 <div class="label-name">Title of Dream:</div> 
