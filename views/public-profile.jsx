@@ -3,11 +3,8 @@ const Layout = require("./layout");
 
 class Home extends React.Component {
   render() {
-    //console.log(this.props.dreams.name); // no works
-    // console.log('in jsx', this.props.userinfo); // no works
-    // console.log('dreams', this.props.dreams)
-    // console.log("this dreams", this.props.dreams) // works
-    let listOfDreams = "User has no dreams!";
+    let loggedIn = this.props.loggedIn;
+    let listOfDreams;
     if (this.props.dreams !== null || this.props.dreams !== undefined) {
       listOfDreams = this.props.dreams.map(item => {
         return <div class="user-profile-cards-dream"> <img src={item.dreamimage} />  Title: {item.dreamname} <br/> {item.dreamdescription}</div>
@@ -19,8 +16,9 @@ class Home extends React.Component {
     console.log("if following", this.props.following)
     if (this.props.following === true) {
       console.log("you follow already");
-      let unfollowUrl = "/dreamers/" + this.props.userinfo.userid + "/unfollow";
-      followButton = <a href={unfollowUrl}><div class="button-follow">Unfollow</div></a>;
+      let unfollowUrl = "/dreamers/" + this.props.userinfo.userid;
+      // let unfollowUrl = "/dreamers/" + this.props.userinfo.userid + "/unfollow";
+      followButton = <a href={unfollowUrl}><div class="button-follow">Following</div></a>;
     } else {
       // console.log("not followed");
       if (this.props.userinfo !== undefined) {
@@ -34,7 +32,7 @@ class Home extends React.Component {
     }
     //console.log(listOfDreams)
     return (
-      <Layout>
+      <Layout loggedIn={loggedIn}>
         <div class="user-profile">
           <div class="user-profile-top">
             <div class="user-profile-username">

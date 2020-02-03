@@ -3,8 +3,9 @@ const Layout = require("./layout");
 
 class Register extends React.Component {
   render() {
+    let loggedIn = this.props.loggedIn;
     return (
-      <Layout>
+      <Layout loggedIn={loggedIn}>
         <h1><img class="h1-icon" src="/images/sleep.png" /> Register today to be a dreamer... </h1>
         <form action="/register" autocomplete="off" method="POST">
             <div class="form-row form-row-text">

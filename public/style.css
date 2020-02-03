@@ -346,6 +346,7 @@ transform: scale(1);
     margin-bottom: 20px;
     background: #a790bc44;
     padding: 20px;
+    min-width: 43%;
 }
 
 .user-profile-cards-dream img {
@@ -374,6 +375,24 @@ transform: scale(1);
 
 .button-follow {
     background: rgb(115,99,159);
+}
+
+.button-delete {
+    padding: 3px 5px;
+    border: none;
+    border-radius: 5px;
+    color: #ffffff;
+    font-size: 15px;
+    font-family: 'BentonModDisp BD';
+}
+
+.button-delete:hover {
+    cursor: pointer;
+    background: #d9d71e;
+}
+
+.button-delete {
+    background: #a790bc;
 }
 
 /* INDEX */
@@ -559,6 +578,25 @@ transform: scale(1);
 
 .dream-profile-description {
     background: #a790bc22;
+}
+
+.dream-cards-posted {
+    font-size: 16px;
+    text-align: right;
+}
+
+.dream-cards-details {
+    display: flex;
+    align-items: center;
+}
+
+.dream-cards-image {
+    width: 40px;
+}
+
+.dream-cards-title {
+    text-transform: uppercase;
+    font-family: 'BentonModDisp BD';
 }
 
 footer {

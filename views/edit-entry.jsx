@@ -4,11 +4,13 @@ const Layout = require("./layout");
 class Home extends React.Component {
   render() {
     let loggedIn = this.props.loggedIn;
+    const id = this.props.artists.id;
+    const actionUrl = "/dreams/"+id+"?_method=put";
     return (
       <Layout loggedIn={loggedIn}>
-        <h1>ADD A DREAM, {this.props.username}</h1>
+        <h1>EDIT DREAM, {this.props.title}</h1>
         The key to getting the most from this app lies in integrating it into your daily routine. Once you get used to recording your dreams, not only will the act of writing them down get easier but the ease with which you remember them will improve too. The more you look, the more you see.
-        <form action="/dreams/add" autocomplete="off" method="POST">
+        <form action={actionUrl} autocomplete="off" method="POST">
             <div class="form-row">
                 <div class="label-name">Visibility:</div> 
                 <select>
@@ -18,7 +20,7 @@ class Home extends React.Component {
             </div>
             <div class="form-row form-row-text">
                 <div class="label-name">Title of Dream:</div> 
-                <input class="input-text" type="text" name="title" />
+                <input class="input-text" value={this.props.dreams.title} type="text" name="title" />
             </div>
             <div class="form-row">
                 <div class="label-name">Feelings:</div> 
@@ -35,7 +37,7 @@ class Home extends React.Component {
             </div>
             <div class="form-row">
                 <div class="label-name">The Story:</div> 
-                <textarea name="description" rows="4" cols="50"> </textarea>
+                <textarea name="description" value={this.props.description} rows="4" cols="50"> </textarea>
             </div>
             <div class="form-row form-button">
                 <input class="button-submit" type="submit" />

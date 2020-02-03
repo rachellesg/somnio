@@ -92,6 +92,20 @@ module.exports = (dbPoolInstance) => {
       });
     }
 
+    let allDreamsPage = (callback) => {
+      let query = 'SELECT users.id AS userID, users.username as username, dream_log.id as dreamid, dream_log.name AS dreamname, dream_log.description AS dreamdescription, dream_log.category AS dreamcategory, dream_log.private AS dreamprivacy, dream_categories.image AS dreamImage FROM dream_log INNER JOIN dream_categories ON (dream_log.category = dream_categories.name) INNER JOIN users ON (users.id = dream_log.user_id);'
+      dbPoolInstance.query(query, (error, queryResult) => {
+        if (error) {
+          // invoke callback function with results after query has executed
+          callback(error, null);
+        } else {
+          // console.log("dreamlog where user = $1", queryResult.rows);
+          callback(error, queryResult.rows);
+          // console.log("inside dbpool", queryResult.rows);
+        }
+      });
+    }
+
     let createEntry = (data, callback) => {
       let query = 'INSERT INTO dream_log (name, description, user_id, category, private, created_at) VALUES ($1,$2,$3,$4,$5,$6) RETURNING *';
       let values = [data.title, data.description, data.user_id, data.category, data.visibility, data.date];
@@ -106,6 +120,19 @@ module.exports = (dbPoolInstance) => {
         }
       });
     };
+
+    let deleteEntry = (data,callback) => {
+      let query = 'DELETE FROM dream_log WHERE id=$1 RETURNINg *';
+      let values = [data.dreamid];
+      dbPoolInstance.query(query, values, (error, queryResult) => {
+        if (error) {
+          callback(error, null);
+        } else {
+          callback(error,queryResult.rows[0])
+          console.log('dp pool', queryResult.rows[0])
+        }
+      })
+    }
 
     let checkFollow = (data, callback) => {
       let query = 'SELECT * FROM followers WHERE user_id=$1 AND follower_id=$2';
@@ -134,8 +161,9 @@ module.exports = (dbPoolInstance) => {
     }
 
     let unfollowUser = (data, callback) => {
-      let query = 'DELETE FROM followers WHERE user_id=$1, follow_id=$2 RETURNING *'
+      let query = 'DELETE FROM followers WHERE user_id=$2, follower_id=$1 RETURNING *'
       let values = [data.followid, data.userid];
+      console.log('models unfollow values:', values);
       dbPoolInstance.query(query, values, (error, queryResult) => {
         if (error) {
           callback(error, null);
@@ -148,8 +176,10 @@ module.exports = (dbPoolInstance) => {
     
     return {
         createEntry,
+        deleteEntry,
         createUser,
         loginUser,
+        allDreamsPage,
         userDreamsPage,
         dreamsPage,
         followUser,

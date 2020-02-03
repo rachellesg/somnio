@@ -3,8 +3,9 @@ const Layout = require("./layout");
 
 class Login extends React.Component {
   render() {
+    let loggedIn = this.props.loggedIn;
     return (
-      <Layout>
+      <Layout loggedIn={loggedIn}>
         <h1>you're just a step away,<br />
         <span class="highlight">login</span> to store your dreams</h1>
         <form action="/dreamers" autocomplete="off" method="POST">

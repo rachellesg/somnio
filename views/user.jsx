@@ -4,8 +4,9 @@ const Layout = require("./layout");
 class Home extends React.Component {
   render() {
     console.log(this.props.dreams.username);
+    let loggedIn = this.props.loggedIn;
     return (
-      <Layout>
+      <Layout loggedIn={loggedIn}>
         <div class="user-profile">
           <div class="user-profile-top">
             <div class="user-profile-username">

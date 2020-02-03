@@ -4,6 +4,26 @@ const React = require("react");
 
 class Layout extends React.Component {
     render() {
+        const loggedIn = this.props.loggedIn;
+        console.log("detect logged in", loggedIn)
+        let navBar;
+        if (loggedIn == true) {
+            console.log("layout, if true");
+            let viewDreamsUrl = "/dreams";
+            let viewDreamsButton = <a href={viewDreamsUrl}>All Dreams</a>;
+            let addDreamUrl = "/dreams/add";
+            let addDreamButton = <a href={addDreamUrl}>Add Dream ++</a>;
+            let logOutUrl = "/logout";
+            let logOutButton = <a href={logOutUrl}>Log Out</a>;
+            navBar = <span> {viewDreamsButton} | {addDreamButton} | {logOutButton}</span>;
+        } else {
+            console.log("layout, if false")
+            let registerUrl = "/register";
+            let registerButton = <a href={registerUrl}>Register</a>;
+            let logInUrl = "/logout";
+            let logInButton = <a href={logInUrl}>Log In</a>;
+            navBar = <span>{registerButton} | {logInButton}</span>;
+        }
         return (
             <html>
                 <head>
@@ -20,7 +40,7 @@ class Layout extends React.Component {
                                 </span>
                             </div>
                             <div class="create_dream">
-                                <a href="/add">+++</a> | <a href="/logout">Log Out</a>
+                                {navBar}
                             </div>
                         </div>
                         <div class="content">
