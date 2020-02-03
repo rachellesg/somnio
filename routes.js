@@ -15,6 +15,7 @@ module.exports = (app, allModels) => {
 
     // actual routes
     app.get('/', somnioControllers.homepage);
+    app.get('/error', somnioControllers.error);
     app.get('/register', somnioControllers.register);
     app.post('/register', somnioControllers.createUser);
 

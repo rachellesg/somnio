@@ -11,9 +11,25 @@ module.exports = (db) => {
     let homepage = (request, response) => {
       const userID = request.cookies.userID;
       const hashedLogin = request.cookies.loggedIn;
-      if (hashedLogin === sha256(SALT + request.cookies.userID)) {
-        console.log("user logged in verified");
+      if (hashedLogin === sha256(SALT + userID)) {
+        // console.log("user logged in verified");
         response.redirect('dreamers/'+userID);
+      } else {
+        response.render('index');
+      }
+    }
+
+    let error = (request, response) => {
+      const userID = request.cookies.userID;
+      const hashedLogin = request.cookies.loggedIn;
+      const currentUser = request.cookies.username;
+      if (hashedLogin === sha256(SALT + userID)) {
+        // console.log("user logged in verified");,
+        let data = {
+          currentuser: currentUser,
+          loggedIn: true
+        }
+        response.render('error', data);
       } else {
         response.render('index');
       }
@@ -25,7 +41,7 @@ module.exports = (db) => {
       const hashedLogin = request.cookies.loggedIn;
       console.log("controller user id", userID);
       if (hashedLogin === sha256(SALT + request.cookies.userID)) {
-        console.log("user logged in verified");
+        // console.log("user logged in verified");
         response.redirect('/dreamers/'+userID);
       } else {
         response.render('register');
@@ -116,7 +132,7 @@ module.exports = (db) => {
       })
     }
 
-    // loading dreamss profile page
+    // loading dreams profile page
     let dreamsPage = (request, response) => {
       const userID = request.cookies.userID;
       const hashedLogin = request.cookies.loggedIn;
@@ -128,13 +144,18 @@ module.exports = (db) => {
         console.log('dreamid', data);
         db.somnio.dreamsPage(data, (error,result) => {
           const currentUser = request.cookies.username;
-          let data = {
-            currentuser: currentUser,
-            dreams: result[0],
-            loggedIn: true
+          if (result[0] === undefined) {
+            response.redirect('/error');
+            console.log("no such dream");
+          } else {
+            let data = {
+              currentuser: currentUser,
+              dreams: result[0],
+              loggedIn: true
+            }
+            console.log("controller", data)
+            response.render('single-dream', data)
           }
-          console.log("controller", data)
-          response.render('single-dream', data)
         })
       } else {
         response.redirect('login');
@@ -325,6 +346,7 @@ module.exports = (db) => {
      */
     return {
         homepage,
+        error,
         addDreams,
         createDreams,
         register,
