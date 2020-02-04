@@ -9,14 +9,15 @@ class Home extends React.Component {
     let display;
     console.log(username, currentuser)
     let listOfDreams = this.props.dreams.map(item => {
+      if (item.dreamprivacy === true) {
+        display = "none";
+        console.log(item.dreamprivacy)
+      } else if (item.dreamprivacy === false) {
+        display = "inline-block";
+        console.log(item.dreamprivacy)
+      }
         let userUrl = "/dreamers/"+item.userid;
         let dreamsUrl = "/dreams/"+item.dreamid;
-        if (item.dreamprivacy === true) {
-          display = "none";
-          console.log("private")
-        } else {
-          display = "inline-block";
-        }
         return <div class="user-profile-cards-dream" style={{display}}>
           <div class="dream-cards-details">
             <div class="dream-cards-image">

@@ -45,7 +45,6 @@ class Register extends React.Component {
                   <div class="label-name">Username:</div> 
                   <input class="input-text" type="text" name="username" />
               </div>
-              <p>{showPw}</p>
               <div class="form-row form-row-text">
                   <div class="label-name">Password:</div> 
                   <input class="input-text" id="current-password" type={showPw} name="password" /> <input type="checkbox" defaultChecked={this.state.complete} onChange={e => this.handleChange(e)}/>

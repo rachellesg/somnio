@@ -43,7 +43,7 @@ module.exports = (dbPoolInstance) => {
     let editUser = (data, callback) => {
       let query = 'UPDATE users SET username=$2, password=$3 WHERE id=$1';
       let password = sha256(data.password + SALT);
-      let values = [data.username, password];
+      let values = [data.userid, data.username, password];
       console.log(values);
       dbPoolInstance.query(query, values, (error, queryResult) => {
         if (error) {
@@ -80,7 +80,7 @@ module.exports = (dbPoolInstance) => {
     let userDreamsPage = (data, callback) => {
       let query = 'SELECT id AS userID, username AS username FROM users WHERE id=$1'
       let values = [data.id];
-      // console.log("user values:", values);
+      console.log("user values:", values);
       dbPoolInstance.query(query, values, (error, queryResult) => {
         if (error) {
           // invoke callback function with results after query has executed
@@ -125,7 +125,6 @@ module.exports = (dbPoolInstance) => {
 
     let allDreamsPage = (callback) => {
       let query = 'SELECT users.id AS userID, users.username as username, dream_log.id as dreamid, dream_log.name AS dreamname, dream_log.description AS dreamdescription, dream_log.category AS dreamcategory, dream_log.private AS dreamprivacy, dream_categories.image AS dreamImage, dream_log.created_at AS dreamcreated FROM dream_log INNER JOIN dream_categories ON (dream_log.category = dream_categories.name) INNER JOIN users ON (users.id = dream_log.user_id);'
-
       // ORDER BY dream_log.created_at DESC
       dbPoolInstance.query(query, (error, queryResult) => {
         if (error) {

@@ -17,7 +17,7 @@ class Home extends React.Component {
             display = "none";
             console.log("private")
           } else {
-            display = "inline-block";
+            // display = "inline-block";
           }
         }
         let dreamsUrl = "/dreams/"+item.dreamid;

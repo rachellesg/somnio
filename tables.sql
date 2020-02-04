@@ -14,7 +14,7 @@ CREATE TABLE IF NOT EXISTS dream_log (
   "name" TEXT,
   "description" TEXT,
   "user_id" INTEGER REFERENCES users(id),
-  "created_at" DATE,
+  "created_at" DATE default CURRENT_DATE,
   "category" TEXT,
   "private" BOOLEAN
 );
