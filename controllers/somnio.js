@@ -74,20 +74,13 @@ module.exports = (db) => {
 
     // loading user's profile page
     let userPage = (request, response) => {
-
-      // let currentUserID = request.cookies.userID;
-      // let followUser = request.params.id;
-      // let data = {
-      //   userid: currentUserID, // current user who is following
-      //   followid: followUser // who follows this user
-      // }
+      const hashedLogin = request.cookies.loggedIn;
 
       let userID = request.params.id;
-      const currentUserID = request.cookies.userID;
       const data = {
         id: userID
       }
-      // console.log('userid', userID);
+
       db.somnio.userDreamsPage(data, (error, results) => {
         if (request.params.id === undefined) {
           console.log("no user")
@@ -107,12 +100,12 @@ module.exports = (db) => {
             let stringDate;
             console.log("DREAM CREATED SRESULT", results.result[0])
             if (results.result[0] === undefined) {
-              stringDate = "HELLO"
+              stringDate = "unavailable"
             } else {
               let date = results.result[0].dreamcreated;
               stringDate = date.toString().split(" ").slice(0, 4).join(" ");
             }
-            let data = {
+            let followingData = {
               following: true,
               currentuser: currentUser,
               userid: currentUserID,
@@ -122,18 +115,18 @@ module.exports = (db) => {
               userinfo: results.queryResult,
               loggedIn: true
             }
-            console.log(results.queryResult.userid);
+            // console.log(results.queryResult.userid);
             // console.log("PRINT THIS DATE PLEASE", date);
-            response.render('public-profile', data)
+            response.render('public-profile', followingData)
           } else {
             let stringDate;
             if (results.result[0] === undefined) {
-              stringDate = "HELLO"
+              stringDate = "unavailable"
             } else {
               let date = results.result[0].dreamcreated;
               stringDate = date.toString().split(" ").slice(0, 4).join(" ");
             }
-            let data = {
+            let notFollowingData = {
               following: false,
               currentuser: currentUser,
               userid: currentUserID,
@@ -143,12 +136,18 @@ module.exports = (db) => {
               userinfo: results.queryResult,
               loggedIn: true
             }
-            console.log("not followed::", data)
-            response.render('public-profile', data)
+            console.log("not followed::", notFollowingData)
+            response.render('public-profile', notFollowingData)
           }
           // console.log("PRINTING THIS to my page", data)
         })
       })
+      
+      // if (hashedLogin === sha256(SALT + userID)) {
+      // } else {
+      //   response.redirect('/login');
+      // }
+      // console.log('userid', userID);
     }
 
     // loading dreams profile page
@@ -175,13 +174,13 @@ module.exports = (db) => {
               date: stringDate,
               loggedIn: true
             }
-            console.log("print string date", stringDate)
-            console.log("controller", result[0])
+            // console.log("print string date", stringDate)
+            // console.log("controller", result[0])
             response.render('single-dream', data)
           }
         })
       } else {
-        response.redirect('login');
+        response.redirect('/login');
       }
     }
 
@@ -272,7 +271,7 @@ module.exports = (db) => {
         });
         // response.render(data)
       } else {
-        response.redirect('login');
+        response.redirect('/login');
       }
     }
 
@@ -315,7 +314,7 @@ module.exports = (db) => {
         console.log(username, userID)
         response.render('create-entry', data);
       } else {
-        response.redirect('login');
+        response.redirect('/login');
       }
     }
 

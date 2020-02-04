@@ -28,7 +28,7 @@ class Home extends React.Component {
                     (present infinitive somniāre, perfect active somniāvī, supine somniātum);
                   </p>
                   <div class="index-actions">
-                    <a href="/register">Register today to be a dreamer</a> | <a href="/login">Start dreaming</a>
+                    <a class="button-register" href="/register">Register today to be a dreamer</a> | <a class="button-login" href="/login">Start dreaming</a>
                   </div>
               </div>
           </body>

@@ -94,7 +94,7 @@ a:hover {
 
 h1 {
     color: #a790bc;
-    line-height: 35px;
+    line-height: 40px;
     font-family: 'BentonModDisp BD';
     width: 100%;
     margin-bottom: 10px !important;
@@ -164,6 +164,14 @@ header {
 
 /* FORMS */
 
+.login {
+    display: flex;
+}
+
+.login form {
+    margin-top: 30px;
+}
+
 .form-row {
     margin: 25px 0;
     display: inline-flex;
@@ -173,6 +181,11 @@ header {
 
 .form-row-text {
     border-bottom: 1px solid;
+}
+
+.form-row-5 {
+    width: 50%;
+    align-items: center;
 }
 
 .form-row-3 {
@@ -203,7 +216,8 @@ header {
     font-family: 'BentonModDisp BD';
 }
 
-input[type="text"] {
+input[type="text"],
+input[type="password"] {
     width: 400px;
     background: transparent;
     border-top: 0;
