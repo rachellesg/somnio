@@ -11,8 +11,7 @@ Created userflow and table structures before embarking on the code. Lucidchart i
 If I had more time I would refactor my code, rename some of the variables to make it more clear and not confuse myself. 
 
 ### What in my code and program design in the project went well? Is there anything I would do the same next time?
-
-[Imgur](https://imgur.com/jh2nGKc)
+![Lucid Chart]([img]https://i.imgur.com/jh2nGKc.png[/img])
 
 
 ##  WDI Unit 2 Post Mortem
