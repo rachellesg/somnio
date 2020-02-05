@@ -21,7 +21,7 @@ None.
 
 ### What habits did I have during this unit that I can improve on? 
 
-Writing cleaner code
+Writing cleaner code. Trying to refactor code. 
 
 ### How is the overall level of the course during this unit? (instruction, course materials, etc.)
 
