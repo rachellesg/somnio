@@ -355,13 +355,31 @@ module.exports = (db) => {
         } else {
             response.render('login');
         }
-
-
     }
 
-    // editing dreams
+    // render EDIT dream entry page
     let editDreams = (request, response) => {
+      const userID = request.cookies.userID;
+      const hashedLogin = request.cookies.loggedIn;
+      if (hashedLogin === sha256(SALT + userID)) {
+        let dreamid = request.params.id;
+        const data = {
+            id: userID,
+            username: username,
+            loggedIn: true
+        }
+        console.log(username, userID)
+        response.render('edit-entry', data);
+      } else {
+          response.redirect('/login');
+      }
+  }
 
+    // editing dreams
+    let updateDreams = (request, response) => {
+      const data = {
+          dreamid: request.params.id,
+      };
     }
 
     // delete dreams
@@ -423,6 +441,30 @@ module.exports = (db) => {
         })
     }
 
+    let followingDreams = (request, response) => {
+        const userID = request.cookies.userID;
+        const hashedLogin = request.cookies.loggedIn;
+        if (hashedLogin === sha256(SALT + userID)) {
+            let currentUserID = request.cookies.userID;
+            let followUser = request.params.id;
+            let data = {
+                userid: currentUserID, // current user who is following
+                followid: followUser // who follows this user
+            }
+            console.log(currentUserID, followUser);
+            // db.somnio.followingDreams(data, (error, result) => {
+            //     let data = {
+            //         user_id: result.user_id,
+            //         loggedIn: true
+            //     }
+            //     console.log("result", data);
+            //     response.redirect('/dreamers/' + result.user_id);
+            // })
+        } else {
+            response.redirect("/login");
+        }
+    }
+
     /**
      * ===========================================
      * Export controller functions as a module
@@ -445,7 +487,8 @@ module.exports = (db) => {
         followUser,
         unfollowUser,
         deleteDreams,
-        updateUser
+        updateUser,
+        followingDreams
     };
 
 }

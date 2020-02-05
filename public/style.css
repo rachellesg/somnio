@@ -494,11 +494,11 @@ transform: scale(1);
 }
 
 .user-profile-cards-dream {
-    /* flex: 1 1 50%; */
+    flex: 1 0 31%;
     margin-bottom: 20px;
+    margin-right: 20px;
     background: #a790bc44;
-    padding: 20px;
-    min-width: 43%;
+    padding: 15px;
 }
 
 .user-profile-cards-dream img {

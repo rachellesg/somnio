@@ -44,7 +44,7 @@ class Home extends React.Component {
           followButton =  <a href={followUrl}><div class="button-follow">+ Follow</div></a>;
         } else {
           let followUrl = "/dreamers/" + this.props.userinfo.userid + "/edit";
-          followButton = <a href={followUrl}><div class="button-follow">Edit</div></a>;
+          followButton = " ";
         }
       }
     }

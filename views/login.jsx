@@ -6,8 +6,12 @@ class Login extends React.Component {
     let loggedIn = this.props.loggedIn;
     return (
       <Layout loggedIn={loggedIn}>
-        <h1>you're just a step away,<br />
-        <span class="highlight">login</span> to store your dreams</h1>
+      <div class="login">
+        <div class="form-row-5">
+          <h1>you're just a step away,<br />
+          <span class="highlight">login</span> to store your dreams</h1>
+        </div>
+        <div class="form-row-5">
         <form action="/dreamers" autocomplete="off" method="POST">
             <div class="form-row form-row-text">
                 <div class="label-name">Username:</div> 
@@ -21,6 +25,8 @@ class Login extends React.Component {
                 <input class="button-submit" type="submit" />
             </div>
         </form>
+        </div>
+        </div>
       </Layout>
     );
   }

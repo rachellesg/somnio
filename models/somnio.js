@@ -153,6 +153,21 @@ module.exports = (dbPoolInstance) => {
       });
     };
 
+    let updateEntry = (data, callback) => {
+      let query = 'UPDATE dream_log SET rivacy=$2, title=$3 WHERE id=$1';
+      let values = [data.userid, data.username, password];
+      console.log(values);
+      dbPoolInstance.query(query, values, (error, queryResult) => {
+        if (error) {
+          // invoke callback function with results after query has executed
+          callback(error, null);
+        } else {
+          callback(error, queryResult.rows[0]);
+          // console.log(queryResult.rows[0].password);
+        }
+      });
+    }
+
     let deleteEntry = (data,callback) => {
       let query = 'DELETE FROM dream_log WHERE id=$1 RETURNINg *';
       let values = [data.dreamid];
@@ -205,6 +220,19 @@ module.exports = (dbPoolInstance) => {
         }
       })
     }
+
+    let followingDreams = (data, callback) => {
+      let query = 'SELECT * FROM followers WHERE follower_id=$1';
+      let values = [data.userid];
+      dbPoolInstance.query(query, values, (error, queryResult) => {
+        if (error) {
+          callback(error, null);
+        } else {
+          callback(error, queryResult.rows);
+          console.log("inside dbpool", queryResult.rows);
+        }
+      })
+    }
     
     return {
         createEntry,
@@ -218,7 +246,8 @@ module.exports = (dbPoolInstance) => {
         dreamsPage,
         followUser,
         unfollowUser,
-        checkFollow
+        checkFollow,
+        followingDreams
     };
   };
   
